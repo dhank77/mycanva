@@ -17,8 +17,6 @@ export const UseAutoResize = ({
       canvas.setHeight(height);
       canvas.setWidth(width);
 
-      console.log(width);
-
       const center = canvas.getCenter();
       const zoomRatio = 0.85;
       const lokalWorkspace = canvas
