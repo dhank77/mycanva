@@ -4,7 +4,11 @@ import { UseAutoResize } from "./use-autoresize";
 import { buildEditor } from "./build-editor";
 import { UseCanvasEvent } from "./use-canvas-event";
 
-export const useEditor = () => {
+export const useEditor = ({
+   clearSelection
+} :  {
+   clearSelection?: () => void,
+}) => {
    const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
    const [container, setContainer] = useState<HTMLDivElement | null>(null);
 
@@ -22,6 +26,7 @@ export const useEditor = () => {
    UseCanvasEvent({
       canvas,
       setSelectedObject,
+      clearSelection
    });
 
    const editor = useMemo(() => {

@@ -4,9 +4,11 @@ import { useEffect } from "react";
 export const UseCanvasEvent = ({
    canvas,
    setSelectedObject,
+   clearSelection,
 }: {
    canvas: fabric.Canvas | null;
    setSelectedObject: (objects: fabric.Object[]) => void;
+   clearSelection?: () => void;
 }) => {
    useEffect(() => {
       if (canvas) {
@@ -18,6 +20,7 @@ export const UseCanvasEvent = ({
          });
          canvas.on("selection:cleared", () => {
             setSelectedObject([]);
+            clearSelection?.();
          });
       }
 
@@ -28,5 +31,5 @@ export const UseCanvasEvent = ({
             canvas.off("selection:cleared");
         }
       }
-   }, [canvas]);
+   }, [canvas, clearSelection]);
 };

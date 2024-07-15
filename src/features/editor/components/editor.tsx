@@ -7,12 +7,35 @@ import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { Footer } from "./footer";
-import { ActiveToolTypes } from "@/lib/types";
+import { ActiveToolTypes, closeSideBarTools,  } from "@/lib/types";
 import { ShapeSidebar } from "./sidebar/shape-sidebar";
 import { FillColorSidebar } from "./sidebar/fill-color-sidebar";
 
 export const Editor = () => {
-   const { init, editor } = useEditor();
+
+    // activeTool
+    const [activeTool, setActiveTool] = useState<ActiveToolTypes>("select");
+    const onChangeActiveTool = useCallback(
+       (tool: ActiveToolTypes) => {
+          if (tool == activeTool) {
+             return setActiveTool("select");
+          }
+ 
+          setActiveTool(tool);
+       },
+       [activeTool]
+    );
+ 
+    // hideSidebarNotSelection
+    const clearSelection = useCallback(() => {
+       if(closeSideBarTools.includes(activeTool)) {
+          setActiveTool("select");
+       }
+    }, [activeTool]);
+
+   const { init, editor } = useEditor({
+      clearSelection : clearSelection,
+   });
    const canvasRef = useRef(null);
    const containerRef = useRef<HTMLDivElement>(null);
 
@@ -32,18 +55,6 @@ export const Editor = () => {
       };
    }, [init]);
 
-   // activeTool
-   const [activeTool, setActiveTool] = useState<ActiveToolTypes>("select");
-   const onChangeActiveTool = useCallback(
-      (tool: ActiveToolTypes) => {
-         if (tool == activeTool) {
-            return setActiveTool("select");
-         }
-
-         setActiveTool(tool);
-      },
-      [activeTool]
-   );
 
    return (
       <div className="h-full flex flex-col">

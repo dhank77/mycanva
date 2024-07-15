@@ -34,5 +34,7 @@ export const colors = [
    material.deepOrange["500"],
    material.brown["500"],
    material.blueGrey["500"],
-   "transparent"
+   "transparent",
 ];
+
+export const closeSideBarTools = "fill";
