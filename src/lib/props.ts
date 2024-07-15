@@ -1,4 +1,5 @@
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import type { IconType } from "react-icons";
 import { ActiveToolTypes } from "./types";
 
 export interface SidebarProps {
@@ -12,3 +13,13 @@ export interface ActiveToolProps {
     activeTool : ActiveToolTypes,
     setActiveTool: (tool: ActiveToolTypes) => void;
 }
+
+export interface ToolShapeProps {
+    onClick: () => void,
+    icon: LucideIcon | IconType,
+    iconClassName? : string,
+}
+
+export interface ShapeEditorProps {
+    addCircle: () => void,
+ }
