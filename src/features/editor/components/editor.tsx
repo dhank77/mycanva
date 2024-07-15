@@ -8,6 +8,7 @@ import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { Footer } from "./footer";
 import { ActiveToolTypes } from "@/lib/types";
+import { ShapeSidebar } from "./sidebar/shape-sidebar";
 
 export const Editor = () => {
    const { init } = useEditor();
@@ -44,10 +45,14 @@ export const Editor = () => {
    );
 
    return (
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col absolute">
          <Navbar activeTool={activeTool} setActiveTool={onChangeActiveTool} />
          <div className="flex w-full h-[calc(100%-68px)]">
             <Sidebar
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+            <ShapeSidebar
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}
             />
