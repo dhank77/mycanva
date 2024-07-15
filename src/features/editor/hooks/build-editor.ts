@@ -32,12 +32,6 @@ export const buildEditor = ({
    };
 
    return {
-      getFillColor: () => {
-         const selected = selectedObject[0];
-         if(!selected) return fillColor;
-         const value = selected.fill || fillColor;
-         return value as string;
-      },
       changeFillColor: (color: string) => {
          setFillColor(color);
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
@@ -133,7 +127,18 @@ export const buildEditor = ({
       
       // value
       canvas,
-      strokeColor,
+      getFillColor: () => {
+         const selected = selectedObject[0];
+         if(!selected) return fillColor;
+         const value = selected.fill || fillColor;
+         return value as string;
+      },
+      getStrokeColor: () => {
+         const selected = selectedObject[0];
+         if(!selected) return strokeColor;
+         const value = selected.stroke || strokeColor;
+         return value as string;
+      },
       strokeWidth,
       selectedObject,
    };

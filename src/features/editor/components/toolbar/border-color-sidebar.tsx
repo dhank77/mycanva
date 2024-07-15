@@ -29,7 +29,7 @@ export const BorderColorSidebar = ({
       <ScrollArea>
         <div className="space-y-6 p-4">
           <ToolPickerColor
-            value={editor?.strokeColor || "#000000"}
+            value={editor?.getStrokeColor() || "#000000"}
             onChange={changeColor}
           />
         </div>
