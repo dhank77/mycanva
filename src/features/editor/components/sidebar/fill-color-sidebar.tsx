@@ -29,7 +29,7 @@ export const FillColorSidebar = ({
       <ScrollArea>
         <div className="space-y-6 p-4">
           <ToolPickerColor
-            value={editor?.fillColor || "#000000"}
+            value={editor?.getFillColor() || "#000000"}
             onChange={changeColor}
           />
         </div>

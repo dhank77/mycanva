@@ -32,6 +32,12 @@ export const buildEditor = ({
    };
 
    return {
+      getFillColor: () => {
+         const selected = selectedObject[0];
+         if(!selected) return fillColor;
+         const value = selected.fill || fillColor;
+         return value as string;
+      },
       changeFillColor: (color: string) => {
          setFillColor(color);
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
@@ -124,10 +130,9 @@ export const buildEditor = ({
          });
          setCenterObject(diamond);
       },
-
+      
       // value
       canvas,
-      fillColor,
       strokeColor,
       strokeWidth,
       selectedObject,

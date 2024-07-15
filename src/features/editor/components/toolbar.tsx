@@ -8,7 +8,7 @@ export const Toolbar = ({
    activeTool,
    setActiveTool,
 }: ActiveToolEditorProps) => {
-   const color = editor?.fillColor;
+   const color = editor?.getFillColor() ?? "black";
 
    if(editor?.selectedObject.length === 0){
       return <div className="w-full mx-4 h-[56px] z-[49] flex gap-x-2" />
