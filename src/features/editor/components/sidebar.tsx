@@ -2,46 +2,50 @@
 
 import { BrainIcon, ImageIcon, LayoutTemplateIcon, SettingsIcon, ShapesIcon, TypeIcon } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
+import { ActiveToolProps } from "@/lib/props";
 
-export const Sidebar = () => {
+export const Sidebar = ({
+   activeTool,
+   setActiveTool,
+}: ActiveToolProps) => {
    return (
       <aside className="h-full w-[100px] border-r overflow-y-auto bg-white">
          <ul className="flex flex-col">
             <SidebarItem
                label="Design"
                icon={LayoutTemplateIcon}
-               onClick={() => {}}
-               isActive={true}
+               onClick={() => setActiveTool("design")}
+               isActive={activeTool === "design"}
             />
             <SidebarItem
                label="Image"
                icon={ImageIcon}
-               onClick={() => {}}
-               isActive={false}
+               onClick={() => setActiveTool("image")}
+               isActive={activeTool === "image"}
             />
             <SidebarItem
                label="Text"
                icon={TypeIcon}
-               onClick={() => {}}
-               isActive={false}
+               onClick={() => setActiveTool("text")}
+               isActive={activeTool === "text"}
             />
             <SidebarItem
                label="Shapes"
                icon={ShapesIcon}
-               onClick={() => {}}
-               isActive={false}
+               onClick={() => setActiveTool("shapes")}
+               isActive={activeTool === "shapes"}
             />
             <SidebarItem
                label="AI"
                icon={BrainIcon}
-               onClick={() => {}}
-               isActive={false}
+               onClick={() => setActiveTool("ai")}
+               isActive={activeTool === "ai"}
             />
             <SidebarItem
                label="Settings"
                icon={SettingsIcon}
-               onClick={() => {}}
-               isActive={false}
+               onClick={() => setActiveTool("settings")}
+               isActive={activeTool === "settings"}
             />
          </ul>
       </aside>

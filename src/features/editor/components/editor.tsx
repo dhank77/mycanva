@@ -1,12 +1,13 @@
 "use client";
 
 import { fabric } from "fabric";
-import { useEffect, useRef } from "react";
+import { act, useCallback, useEffect, useRef, useState } from "react";
 import { useEditor } from "../hooks/use-editor";
 import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { Footer } from "./footer";
+import { ActiveToolTypes } from "@/lib/types";
 
 export const Editor = () => {
    const { init } = useEditor();
@@ -26,19 +27,35 @@ export const Editor = () => {
 
       return () => {
          canvas.dispose();
-      }
+      };
    }, [init]);
+
+   // activeTool
+   const [activeTool, setActiveTool] = useState<ActiveToolTypes>("select");
+   const onChangeActiveTool = useCallback(
+      (tool: ActiveToolTypes) => {
+         if (tool == activeTool) {
+            return setActiveTool("select");
+         }
+
+         setActiveTool(tool);
+      },
+      [activeTool]
+   );
 
    return (
       <div className="h-full flex flex-col">
-         <Navbar />
+         <Navbar activeTool={activeTool} setActiveTool={onChangeActiveTool} />
          <div className="flex w-full h-[calc(100%-68px)]">
-            <Sidebar />
+            <Sidebar
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
             <main className="flex flex-col flex-1 bg-white">
                <Toolbar />
-                  <div className="flex-1 h-full bg-muted" ref={containerRef}>
-                     <canvas ref={canvasRef} />
-                  </div>
+               <div className="flex-1 h-full bg-muted" ref={containerRef}>
+                  <canvas ref={canvasRef} />
+               </div>
                <Footer />
             </main>
          </div>
