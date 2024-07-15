@@ -45,9 +45,9 @@ export const Editor = () => {
    );
 
    return (
-      <div className="h-full flex flex-col absolute">
+      <div className="h-full flex flex-col">
          <Navbar activeTool={activeTool} setActiveTool={onChangeActiveTool} />
-         <div className="flex w-full h-[calc(100%-68px)]">
+         <div className="flex absolute w-full flex-1 h-[calc(100%-68px)] top-[68px]">
             <Sidebar
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}
@@ -57,7 +57,7 @@ export const Editor = () => {
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}
             />
-            <main className="flex flex-col flex-1 bg-white">
+            <main className="flex flex-col flex-1 bg-white overflow-auto">
                <Toolbar />
                <div className="flex-1 h-full bg-muted" ref={containerRef}>
                   <canvas ref={canvasRef} />
