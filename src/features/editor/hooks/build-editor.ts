@@ -1,92 +1,135 @@
 import { fabric } from "fabric";
-import { ShapeEditorProps } from "@/lib/props";
+import { BuildEditorProps, EditorProps } from "@/lib/props";
+import { isTypeText } from "@/lib/utils";
 
-export const buildEditor = (canvas: fabric.Canvas): ShapeEditorProps => {
-  const center = (object: fabric.Object) => {
-    const lokalWorkspace = canvas
-      .getObjects()
-      .find((obj) => obj.name == "clip");
+export const buildEditor = ({
+   canvas,
+   fillColor,
+   strokeColor,
+   strokeWidth,
+   setFillColor,
+   setStrokeColor,
+   setStrokeWidth,
+   selectedObject,
+}: BuildEditorProps): EditorProps => {
+   const center = (object: fabric.Object) => {
+      const lokalWorkspace = canvas
+         .getObjects()
+         .find((obj) => obj.name == "clip");
 
-    const centerPoint = lokalWorkspace?.getCenterPoint();
+      const centerPoint = lokalWorkspace?.getCenterPoint();
 
-    if (!centerPoint) return;
+      if (!centerPoint) return;
 
-    //@ts-ignore
-    canvas._centerObject(object, centerPoint);
-  };
+      //@ts-ignore
+      canvas._centerObject(object, centerPoint);
+   };
 
-  const setCenterObject = (object: fabric.Object) => {
-    center(object);
-    canvas.add(object);
-    canvas.setActiveObject(object);
-  };
+   const setCenterObject = (object: fabric.Object) => {
+      center(object);
+      canvas.add(object);
+      canvas.setActiveObject(object);
+   };
 
-  return {
-    addCircle: () => {
-      const circle = new fabric.Circle({
-        width: 100,
-        height: 100,
-        radius: 100,
-        fill: "black",
-        strokeWidth: 1,
-        stroke: "black",
-      });
+   return {
+      changeFillColor: (color: string) => {
+         setFillColor(color);
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            object.set("fill", color);
+         });
+         canvas.renderAll();
+      },
+      changeStrokeColor: (color: string) => {
+         setStrokeColor(color);
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            if(isTypeText(object.type)){
+               object.set("fill", color);
+            }
+            
+            object.set("stroke", color);
+         });
+         canvas.renderAll();
+      },
+      changeStrokeWidth: (width: number) => {
+         setStrokeWidth(width);
 
-      setCenterObject(circle);
-    },
-    addSquareRounded: () => {
-      const square = new fabric.Rect({
-        width: 170,
-        height: 170,
-        fill: "black",
-        strokeWidth: 1,
-        stroke: "black",
-        rx: 20,
-      });
-      setCenterObject(square);
-    },
-    addSquare: () => {
-        const square = new fabric.Rect({
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            object.set("strokeWidth", width);
+         });
+         canvas.renderAll();
+      },
+      addCircle: () => {
+         const circle = new fabric.Circle({
+            width: 100,
+            height: 100,
+            radius: 100,
+            fill: fillColor ?? "black",
+            strokeWidth: strokeWidth ?? 1,
+            stroke: strokeColor ?? "black",
+         });
+
+         setCenterObject(circle);
+      },
+      addSquareRounded: () => {
+         const square = new fabric.Rect({
             width: 170,
             height: 170,
-            fill: "black",
-            strokeWidth: 1,
-            stroke: "black",
-          });
-          setCenterObject(square);
-    },
-    addTriangle: () => {
-        const triangle = new fabric.Triangle({
+            fill: fillColor ?? "black",
+            strokeWidth: strokeWidth ?? 1,
+            stroke: strokeColor ?? "black",
+            rx: 20,
+         });
+         setCenterObject(square);
+      },
+      addSquare: () => {
+         const square = new fabric.Rect({
             width: 170,
             height: 170,
-            fill: "black",
-            strokeWidth: 1,
-            stroke: "black",
-        })
-        setCenterObject(triangle);
-    },
-    addTriangle180: () => {
-        const triangle = new fabric.Triangle({
+            fill: fillColor ?? "black",
+            strokeWidth: strokeWidth ?? 1,
+            stroke: strokeColor ?? "black",
+         });
+         setCenterObject(square);
+      },
+      addTriangle: () => {
+         const triangle = new fabric.Triangle({
             width: 170,
             height: 170,
-            fill: "black",
-            strokeWidth: 1,
-            stroke: "black",
+            fill: fillColor ?? "black",
+            strokeWidth: strokeWidth ?? 1,
+            stroke: strokeColor ?? "black",
+         });
+         setCenterObject(triangle);
+      },
+      addTriangle180: () => {
+         const triangle = new fabric.Triangle({
+            width: 170,
+            height: 170,
+            fill: fillColor ?? "black",
+            strokeWidth: strokeWidth ?? 1,
+            stroke: strokeColor ?? "black",
             angle: 180,
-        })
-        setCenterObject(triangle);
-    },
-    addDiamond: () => {
-        const diamond = new fabric.Rect({
+         });
+         setCenterObject(triangle);
+      },
+      addDiamond: () => {
+         const diamond = new fabric.Rect({
             left: 100,
             top: 100,
-            fill: 'black',
+            fill: fillColor ?? "black",
             width: 100,
             height: 100,
             angle: 45,
             rx: 20,
-          });
-        setCenterObject(diamond);
-    },
-  };
+         });
+         setCenterObject(diamond);
+      },
+
+      // value
+      canvas,
+      fillColor,
+      strokeColor,
+      strokeWidth,
+      selectedObject,
+   };
 };

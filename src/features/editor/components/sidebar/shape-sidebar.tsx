@@ -1,4 +1,4 @@
-import { ActiveToolProps, ShapeEditorProps } from "@/lib/props";
+import { ActiveToolEditorProps, ActiveToolProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { ToolHeader } from "./tool-header";
@@ -9,15 +9,12 @@ import { FaCircle, FaSquare, FaSquareFull } from "react-icons/fa";
 import { IoTriangle } from "react-icons/io5";
 import { FaDiamond } from "react-icons/fa6";
 
-interface ShapeSideBarProps extends ActiveToolProps {
-  editor: ShapeEditorProps | undefined;
-}
 
 export const ShapeSidebar = ({
   editor,
   activeTool,
   setActiveTool,
-}: ShapeSideBarProps) => {
+}: ActiveToolEditorProps) => {
   return (
     <aside
       className={cn(

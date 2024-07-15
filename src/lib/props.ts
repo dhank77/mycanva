@@ -9,22 +9,46 @@ export interface SidebarProps {
    isActive?: boolean;
 }
 
-export interface ActiveToolProps {
-    activeTool : ActiveToolTypes,
-    setActiveTool: (tool: ActiveToolTypes) => void;
-}
-
 export interface ToolShapeProps {
-    onClick: () => void,
-    icon: LucideIcon | IconType,
-    iconClassName? : string,
+   onClick: () => void;
+   icon: LucideIcon | IconType;
+   iconClassName?: string;
 }
 
-export interface ShapeEditorProps {
-    addCircle: () => void,
-    addSquareRounded: () => void,
-    addSquare: () => void,
-    addTriangle: () => void,
-    addTriangle180: () => void,
-    addDiamond: () => void,
- }
+export interface ActiveToolProps {
+   activeTool: ActiveToolTypes;
+   setActiveTool: (tool: ActiveToolTypes) => void;
+}
+
+export interface EditorProps {
+   addCircle: () => void;
+   addSquareRounded: () => void;
+   addSquare: () => void;
+   addTriangle: () => void;
+   addTriangle180: () => void;
+   addDiamond: () => void;
+   changeFillColor: (color: string) => void;
+   changeStrokeColor: (color: string) => void;
+   changeStrokeWidth: (width: number) => void;
+
+   canvas: fabric.Canvas;
+   fillColor: string;
+   strokeColor: string;
+   strokeWidth: number;
+   selectedObject: fabric.Object[];
+}
+
+export interface ActiveToolEditorProps extends ActiveToolProps {
+   editor: EditorProps | undefined;
+}
+
+export interface BuildEditorProps {
+   canvas: fabric.Canvas;
+   fillColor: string;
+   strokeColor: string;
+   strokeWidth: number;
+   selectedObject: fabric.Object[];
+   setFillColor: (color: string) => void;
+   setStrokeColor: (color: string) => void;
+   setStrokeWidth: (width: number) => void;
+}
