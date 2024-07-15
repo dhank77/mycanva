@@ -1,7 +1,7 @@
 "use client";
 
 import { fabric } from "fabric";
-import { act, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useEditor } from "../hooks/use-editor";
 import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";

@@ -28,16 +28,16 @@ export const ShapeSidebar = ({
       <ToolHeader title="Shapes" description="Create and edit shapes" />
       <ScrollArea>
         <div className="grid grid-cols-3 gap-4 p-4">
-          <ToolShape onClick={() => {}} icon={FaSquare} />
+          <ToolShape onClick={() => editor?.addSquareRounded()} icon={FaSquare} />
           <ToolShape onClick={() => editor?.addCircle()} icon={FaCircle} />
-          <ToolShape onClick={() => {}} icon={FaSquareFull} />
-          <ToolShape onClick={() => {}} icon={IoTriangle} />
+          <ToolShape onClick={() => editor?.addSquare()} icon={FaSquareFull} />
+          <ToolShape onClick={() => editor?.addTriangle()} icon={IoTriangle} />
           <ToolShape
-            onClick={() => {}}
+            onClick={() => editor?.addTriangle180()}
             icon={IoTriangle}
             iconClassName="rotate-180"
           />
-          <ToolShape onClick={() => {}} icon={FaDiamond} />
+          <ToolShape onClick={() => editor?.addDiamond()} icon={FaDiamond} />
         </div>
       </ScrollArea>
 

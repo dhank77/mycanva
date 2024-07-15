@@ -22,4 +22,9 @@ export interface ToolShapeProps {
 
 export interface ShapeEditorProps {
     addCircle: () => void,
+    addSquareRounded: () => void,
+    addSquare: () => void,
+    addTriangle: () => void,
+    addTriangle180: () => void,
+    addDiamond: () => void,
  }

@@ -1,7 +1,7 @@
 "use client";
 
 import { BrainIcon, ImageIcon, LayoutTemplateIcon, SettingsIcon, ShapesIcon, TypeIcon } from "lucide-react";
-import { SidebarItem } from "./sidebar-item";
+import { SidebarItem } from "./sidebar/sidebar-item";
 import { ActiveToolProps } from "@/lib/props";
 
 export const Sidebar = ({
