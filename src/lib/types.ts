@@ -4,8 +4,9 @@ export type ActiveToolTypes =
    //navbar
    | "select"
 
-   // top menu
+   // topbar menu
    | "fill"
+   | "stroke-color"
 
    // side menu
    | "design"

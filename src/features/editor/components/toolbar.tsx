@@ -9,6 +9,7 @@ export const Toolbar = ({
    setActiveTool,
 }: ActiveToolEditorProps) => {
    const color = editor?.getFillColor() ?? "black";
+   const strokeColor = editor?.strokeColor ?? "black";
 
    if(editor?.selectedObject.length === 0){
       return <div className="w-full mx-4 h-[56px] z-[49] flex gap-x-2" />
@@ -16,7 +17,7 @@ export const Toolbar = ({
    
    return (
       <div className="w-full mx-4 h-[56px] z-[49] flex gap-x-2">
-         <div className="flex items-center justify-center h-full">
+         <div className="flex items-center justify-center h-full gap-x-2">
             <Hint label="Fill color" side="bottom">
                <Button
                   onClick={() => setActiveTool("fill")}
@@ -29,6 +30,21 @@ export const Toolbar = ({
                      style={{
                         backgroundColor:
                            typeof color === "string" ? color : "black",
+                     }}
+                  />
+               </Button>
+            </Hint>
+            <Hint label="Border color" side="bottom">
+               <Button
+                  onClick={() => setActiveTool("stroke-color")}
+                  variant="ghost"
+                  size="icon"
+                  className={cn(activeTool == "stroke-color" && "bg-gray-100")}
+               >
+                  <div
+                     className="size-4 rounded-sm border-2"
+                     style={{
+                        borderColor: strokeColor
                      }}
                   />
                </Button>

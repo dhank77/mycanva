@@ -1,10 +1,10 @@
 import { ActiveToolEditorProps, ActiveToolProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { ToolHeader } from "./tool-header";
-import { ToolClose } from "./tool-close";
+import { ToolHeader } from "../tools/tool-header";
+import { ToolClose } from "../tools/tool-close";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ToolShape } from "./tool-shape";
+import { ToolShape } from "../tools/tool-shape";
 import { FaCircle, FaSquare, FaSquareFull } from "react-icons/fa";
 import { IoTriangle } from "react-icons/io5";
 import { FaDiamond } from "react-icons/fa6";

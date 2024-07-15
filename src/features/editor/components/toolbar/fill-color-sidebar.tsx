@@ -1,10 +1,10 @@
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { ToolHeader } from "./tool-header";
-import { ToolClose } from "./tool-close";
+import { ToolHeader } from "../tools/tool-header";
+import { ToolClose } from "../tools/tool-close";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ToolPickerColor } from "./tool-picker-color";
+import { ToolPickerColor } from "../tools/tool-picker-color";
 
 export const FillColorSidebar = ({
   editor,
