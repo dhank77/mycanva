@@ -38,4 +38,7 @@ export const colors = [
    "transparent",
 ];
 
-export const closeSideBarTools = "fill";
+export const closeSideBarTools = [
+   "fill", 
+   "stroke-color",
+];
