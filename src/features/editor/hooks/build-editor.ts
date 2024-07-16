@@ -31,6 +31,13 @@ export const buildEditor = ({
    };
 
    return {
+      changeOpacity: (opacity: number) => {
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            object.set("opacity", opacity);
+         });
+
+         canvas.renderAll();
+      },
       changeFillColor: (color: string) => {
          setFillColor(color);
          canvas.getActiveObjects().forEach((object: fabric.Object) => {

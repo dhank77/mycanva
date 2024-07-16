@@ -5,8 +5,8 @@ import { ToolHeader } from "../tools/tool-header";
 import { ToolClose } from "../tools/tool-close";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Slider } from "@/components/ui/slider";
-import { Label } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 export const BorderWidthSidebar = ({
    editor,

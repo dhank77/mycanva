@@ -4,6 +4,7 @@ import { ActiveToolEditorProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from "lucide-react";
 import { BsBorderWidth } from "react-icons/bs";
+import { RxTransparencyGrid } from "react-icons/rx";
 
 export const Toolbar = ({
    editor,
@@ -77,6 +78,16 @@ export const Toolbar = ({
                   size="icon"
                >
                   <ArrowDownCircleIcon className="size-5" />
+               </Button>
+            </Hint>
+            <Hint label="Opacity" side="bottom">
+               <Button
+                  onClick={() => setActiveTool("opacity")}
+                  variant="ghost"
+                  size="icon"
+                  className={cn(activeTool == "opacity" && "bg-gray-100")}
+               >
+                  <RxTransparencyGrid className="size-5" />
                </Button>
             </Hint>
          </div>

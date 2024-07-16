@@ -30,9 +30,12 @@ export interface EditorProps {
    changeFillColor: (color: string) => void;
    changeStrokeColor: (color: string) => void;
    changeStrokeWidth: (width: number) => void;
+   changeOpacity: (opacity: number) => void;
+  
    getFillColor: () => string;
    getStrokeColor: () => string;
    getStrokeWidth: () => number;
+
    bringToFront: () => void;
    sendToBack: () => void;
 

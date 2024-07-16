@@ -10,6 +10,7 @@ export type ActiveToolTypes =
    | "stroke-width"
    | "bring-front"
    | "send-back"
+   | "opacity"
 
    // side menu
    | "design"
