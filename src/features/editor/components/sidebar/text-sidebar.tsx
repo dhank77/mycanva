@@ -34,7 +34,7 @@ export const TextSidebar = ({
                   onChange={(e) => setText(e.target.value)}
                />
                <Button className="w-full"
-                  onClick={() => editor?.addTextbox(text ?? "textbox")}>
+                  onClick={() => editor?.addTextbox(text !== "" ? text : "textbox")}>
                   Add Textbox
                </Button>
                <Button 

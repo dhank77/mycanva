@@ -11,6 +11,7 @@ export type ActiveToolTypes =
    | "bring-front"
    | "send-back"
    | "opacity"
+   | "font"
 
    // side menu
    | "design"
@@ -19,6 +20,27 @@ export type ActiveToolTypes =
    | "shapes"
    | "ai"
    | "settings";
+
+export const fonts = [
+   "Arial",
+   "Arial Black",
+   "Verdana",
+   "Helvetica",
+   "Tahoma",
+   "Trebuchet MS",
+   "Times New Roman",
+   "Georgia",
+   "Garamond",
+   "Courier New",
+   "Brush Script MT",
+   "Palatino",
+   "Bookman",
+   "Comic Sans MS",
+   "Impact",
+   "Lucida Sans Unicode",
+   "Geneva",
+   "Lucida Console",
+];
 
 export const colors = [
    material.red["500"],
@@ -43,7 +65,7 @@ export const colors = [
 ];
 
 export const closeSideBarTools = [
-   "fill", 
+   "fill",
    "stroke-color",
    "stroke-width",
    "opacity",

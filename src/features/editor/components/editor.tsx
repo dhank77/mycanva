@@ -14,6 +14,7 @@ import { BorderColorSidebar } from "./toolbar/border-color-sidebar";
 import { BorderWidthSidebar } from "./toolbar/border-width-sidebar";
 import { OpacitySidebar } from "./toolbar/opacity-sidebar";
 import { TextSidebar } from "./sidebar/text-sidebar";
+import { FontSidebar } from "./toolbar/font-sidebar";
 
 export const Editor = () => {
 
@@ -97,6 +98,11 @@ export const Editor = () => {
                setActiveTool={onChangeActiveTool}
             />
             <OpacitySidebar
+               editor={editor}
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+            <FontSidebar
                editor={editor}
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}

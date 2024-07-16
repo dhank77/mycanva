@@ -4,9 +4,11 @@ import { isTypeText } from "@/lib/utils";
 
 export const buildEditor = ({
    canvas,
+   font,
    fillColor,
    strokeColor,
    strokeWidth,
+   setFont,
    setFillColor,
    setStrokeColor,
    setStrokeWidth,
@@ -61,6 +63,15 @@ export const buildEditor = ({
 
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             object.set("strokeWidth", width);
+         });
+         canvas.renderAll();
+      },
+      changeFont: (value: string) => {
+         setFont(value);
+
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            //@ts-ignore
+            object.set("fontFamily", value);
          });
          canvas.renderAll();
       },
@@ -174,6 +185,13 @@ export const buildEditor = ({
          const selected = selectedObject[0];
          if(!selected) return strokeWidth;
          const value = selected.strokeWidth || strokeWidth;
+         return value;
+      },
+      getFont: () => {
+         const selected = selectedObject[0];
+         if(!selected) return font;
+         //@ts-ignore
+         const value = selected.get("fontFamily") || font;
          return value;
       },
       selectedObject,

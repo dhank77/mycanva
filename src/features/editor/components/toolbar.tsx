@@ -2,7 +2,7 @@ import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn, isTypeText } from "@/lib/utils";
-import { ArrowDownCircleIcon, ArrowUpCircleIcon } from "lucide-react";
+import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
 import { BsBorderWidth } from "react-icons/bs";
 import { RxTransparencyGrid } from "react-icons/rx";
 
@@ -73,7 +73,24 @@ export const Toolbar = ({
                   </Button>
                </Hint>
             )}
-
+            {isText && (
+               <Hint label="Border Width" side="bottom">
+                  <Button
+                     onClick={() => setActiveTool("font")}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        activeTool == "font" && "bg-gray-100"
+                     )}
+                  >
+                     <div className="max-w-[100px] flex gap-x-2 items-center">
+                        <span className="truncate">{editor?.getFont()}</span>
+                        <ChevronDown className="size-4" />
+                     </div>
+                  </Button>
+               </Hint>
+            )}
             <Hint label="Bring to front" side="bottom">
                <Button
                   onClick={() => editor?.bringToFront()}

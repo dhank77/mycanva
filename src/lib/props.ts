@@ -30,15 +30,16 @@ export interface EditorProps {
    addDiamond: () => void;
    addTextbox: (text: string, options? : ITextOptions) => void;
 
-
    changeFillColor: (color: string) => void;
    changeStrokeColor: (color: string) => void;
    changeStrokeWidth: (width: number) => void;
    changeOpacity: (opacity: number) => void;
+   changeFont: (font: string) => void;
   
    getFillColor: () => string;
    getStrokeColor: () => string;
    getStrokeWidth: () => number;
+   getFont: () => string;
 
    bringToFront: () => void;
    sendToBack: () => void;
@@ -53,10 +54,12 @@ export interface ActiveToolEditorProps extends ActiveToolProps {
 
 export interface BuildEditorProps {
    canvas: fabric.Canvas;
+   font: string;
    fillColor: string;
    strokeColor: string;
    strokeWidth: number;
    selectedObject: fabric.Object[];
+   setFont: (font: string) => void;
    setFillColor: (color: string) => void;
    setStrokeColor: (color: string) => void;
    setStrokeWidth: (width: number) => void;

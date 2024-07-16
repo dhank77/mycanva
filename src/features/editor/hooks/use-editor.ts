@@ -17,6 +17,7 @@ export const useEditor = ({
    const [fillColor, setFillColor] = useState<string>("black");
    const [strokeColor, setStrokeColor] = useState<string>("black");
    const [strokeWidth, setStrokeWidth] = useState<number>(1);
+   const [font, setFont] = useState<string>("Arial");
 
    UseAutoResize({
       canvas,
@@ -34,6 +35,8 @@ export const useEditor = ({
          return buildEditor({
             canvas,
             fillColor,
+            font,
+            setFont,
             strokeColor,
             strokeWidth,
             setFillColor,
