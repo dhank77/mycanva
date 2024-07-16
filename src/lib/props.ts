@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import type { IconType } from "react-icons";
 import { ActiveToolTypes } from "./types";
+import { ITextOptions } from "fabric/fabric-impl";
 
 export interface SidebarProps {
    icon: LucideIcon;
@@ -27,6 +28,9 @@ export interface EditorProps {
    addTriangle: () => void;
    addTriangle180: () => void;
    addDiamond: () => void;
+   addTextbox: (text: string, options? : ITextOptions) => void;
+
+
    changeFillColor: (color: string) => void;
    changeStrokeColor: (color: string) => void;
    changeStrokeWidth: (width: number) => void;

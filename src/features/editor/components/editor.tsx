@@ -13,6 +13,7 @@ import { FillColorSidebar } from "./toolbar/fill-color-sidebar";
 import { BorderColorSidebar } from "./toolbar/border-color-sidebar";
 import { BorderWidthSidebar } from "./toolbar/border-width-sidebar";
 import { OpacitySidebar } from "./toolbar/opacity-sidebar";
+import { TextSidebar } from "./sidebar/text-sidebar";
 
 export const Editor = () => {
 
@@ -67,11 +68,19 @@ export const Editor = () => {
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}
             />
+            {/* sidebar item */}
             <ShapeSidebar
                editor={editor}
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}
             />
+            <TextSidebar
+               editor={editor}
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+
+            {/* toolbar item */}
             <FillColorSidebar
                editor={editor}
                activeTool={activeTool}

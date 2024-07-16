@@ -131,6 +131,13 @@ export const buildEditor = ({
          });
          setCenterObject(diamond);
       },
+      addTextbox: (text, options) => {
+         const value = new fabric.Textbox(text, {
+            type: "textbox",
+            ...options
+         })
+         setCenterObject(value);
+      },
       
       // value toolbar
       canvas,
