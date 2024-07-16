@@ -5,7 +5,7 @@ import { cn, isTypeText } from "@/lib/utils";
 import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
-import { FaBold } from "react-icons/fa";
+import { FaBold, FaItalic } from "react-icons/fa";
 import { RxTransparencyGrid } from "react-icons/rx";
 
 export const Toolbar = ({
@@ -16,12 +16,15 @@ export const Toolbar = ({
    const color = editor?.getFillColor() ?? "black";
    const strokeColor = editor?.getStrokeColor() ?? "black";
    const bold = editor?.getBold() || 400;
+   const italic = editor?.getItalic() || "normal";
 
    const typeObject = editor?.selectedObject[0]?.type;
    const isText = isTypeText(typeObject);
 
    const [properties, setProperties] = useState({
       bold : bold,
+      italic : italic,
+
       color : color,
       strokeColor : strokeColor,
    })
@@ -35,6 +38,18 @@ export const Toolbar = ({
          bold : properties.bold == 400 ? 700 : 400
       })
    };
+   const toogleItalic = () => {
+      if (editor) {
+         editor.changeItalic();
+      }
+      setProperties({
+         ...properties,
+         italic : properties.italic == "italic" ? "normal" : "italic"
+      })
+   };
+
+   console.log(properties);
+   
 
    if (editor?.selectedObject.length === 0) {
       return <div className="w-full mx-4 h-[56px] z-[49] flex gap-x-2" />;
@@ -122,6 +137,21 @@ export const Toolbar = ({
                      )}
                   >
                      <FaBold />
+                  </Button>
+               </Hint>
+            )}
+            {isText && (
+               <Hint label="Italic" side="bottom">
+                  <Button
+                     onClick={() => toogleItalic()}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        properties.italic == "italic" && "bg-gray-100"
+                     )}
+                  >
+                     <FaItalic />
                   </Button>
                </Hint>
             )}

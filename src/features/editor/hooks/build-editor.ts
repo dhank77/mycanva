@@ -170,6 +170,7 @@ export const buildEditor = ({
          canvas.renderAll();
          lokalWorkspace?.sendToBack();
       },
+
       changeBold: () => {
          //@ts-ignore
          const value = selected.get("fontWeight") || 400;
@@ -190,6 +191,28 @@ export const buildEditor = ({
          if(!selected) return 400;
          //@ts-ignore
          const value = selected.get("fontWeight") || 400;
+         return value;
+      },
+      changeItalic: () => {
+         //@ts-ignore
+         const value = selected.get("fontStyle") || "normal";
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            if(isTypeText(object.type)){
+               if(value == "normal"){
+                  //@ts-ignore
+                  object.set("fontStyle", "italic");
+               }else{
+                  //@ts-ignore
+                  object.set("fontStyle", "normal");
+               }
+            }
+         });
+         canvas.renderAll();
+      },
+      getItalic: () => {
+         if(!selected) return "normal";
+         //@ts-ignore
+         const value = selected.get("fontStyle") || "normal";
          return value;
       },
 

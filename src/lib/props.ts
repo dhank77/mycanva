@@ -36,12 +36,14 @@ export interface EditorProps {
    changeOpacity: (opacity: number) => void;
    changeFont: (font: string) => void;
    changeBold: () => void;
+   changeItalic: () => void;
   
    getFillColor: () => string;
    getStrokeColor: () => string;
    getStrokeWidth: () => number;
    getFont: () => string;
    getBold: () => number;
+   getItalic: () => string;
 
    bringToFront: () => void;
    sendToBack: () => void;
