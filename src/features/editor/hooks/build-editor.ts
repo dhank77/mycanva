@@ -12,13 +12,12 @@ export const buildEditor = ({
    setStrokeWidth,
    selectedObject,
 }: BuildEditorProps): EditorProps => {
-   const center = (object: fabric.Object) => {
-      const lokalWorkspace = canvas
+   const lokalWorkspace = canvas
          .getObjects()
          .find((obj) => obj.name == "clip");
 
+   const center = (object: fabric.Object) => {
       const centerPoint = lokalWorkspace?.getCenterPoint();
-
       if (!centerPoint) return;
 
       //@ts-ignore
@@ -126,8 +125,24 @@ export const buildEditor = ({
          setCenterObject(diamond);
       },
       
-      // value
+      // value toolbar
       canvas,
+      bringToFront: () => {
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            object.bringToFront();
+         })
+
+         canvas.renderAll();
+         lokalWorkspace?.sendToBack();
+      },
+      sendToBack: () => {
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            object.sendBackwards(); 
+         })
+
+         canvas.renderAll();
+         lokalWorkspace?.sendToBack();
+      },
       getFillColor: () => {
          const selected = selectedObject[0];
          if(!selected) return fillColor;

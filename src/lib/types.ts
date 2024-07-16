@@ -8,6 +8,8 @@ export type ActiveToolTypes =
    | "fill"
    | "stroke-color"
    | "stroke-width"
+   | "bring-front"
+   | "send-back"
 
    // side menu
    | "design"

@@ -33,6 +33,8 @@ export interface EditorProps {
    getFillColor: () => string;
    getStrokeColor: () => string;
    getStrokeWidth: () => number;
+   bringToFront: () => void;
+   sendToBack: () => void;
 
    canvas: fabric.Canvas;
    selectedObject: fabric.Object[];
