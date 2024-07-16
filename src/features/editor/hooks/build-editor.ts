@@ -86,9 +86,10 @@ export const buildEditor = ({
             width: 170,
             height: 170,
             fill: fillColor ?? "black",
-            strokeWidth: strokeWidth ?? 1,
+            strokeWidth: strokeWidth ?? 10,
             stroke: strokeColor ?? "black",
          });
+         
          setCenterObject(square);
       },
       addTriangle: () => {
@@ -139,7 +140,12 @@ export const buildEditor = ({
          const value = selected.stroke || strokeColor;
          return value as string;
       },
-      strokeWidth,
+      getStrokeWidth: () => {
+         const selected = selectedObject[0];
+         if(!selected) return strokeWidth;
+         const value = selected.strokeWidth || strokeWidth;
+         return value;
+      },
       selectedObject,
    };
 };

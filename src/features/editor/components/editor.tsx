@@ -11,6 +11,7 @@ import { ActiveToolTypes, closeSideBarTools,  } from "@/lib/types";
 import { ShapeSidebar } from "./sidebar/shape-sidebar";
 import { FillColorSidebar } from "./toolbar/fill-color-sidebar";
 import { BorderColorSidebar } from "./toolbar/border-color-sidebar";
+import { BorderWidthSidebar } from "./toolbar/border-width-sidebar";
 
 export const Editor = () => {
 
@@ -76,6 +77,11 @@ export const Editor = () => {
                setActiveTool={onChangeActiveTool}
             />
             <BorderColorSidebar
+               editor={editor}
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+            <BorderWidthSidebar
                editor={editor}
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}

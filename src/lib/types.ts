@@ -7,6 +7,7 @@ export type ActiveToolTypes =
    // topbar menu
    | "fill"
    | "stroke-color"
+   | "stroke-width"
 
    // side menu
    | "design"
@@ -41,4 +42,5 @@ export const colors = [
 export const closeSideBarTools = [
    "fill", 
    "stroke-color",
+   "stroke-width",
 ];

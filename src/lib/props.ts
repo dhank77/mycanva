@@ -32,9 +32,9 @@ export interface EditorProps {
    changeStrokeWidth: (width: number) => void;
    getFillColor: () => string;
    getStrokeColor: () => string;
+   getStrokeWidth: () => number;
 
    canvas: fabric.Canvas;
-   strokeWidth: number;
    selectedObject: fabric.Object[];
 }
 

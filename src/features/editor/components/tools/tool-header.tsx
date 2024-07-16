@@ -6,7 +6,7 @@ export const ToolHeader = ({
   description?: string;
 }) => {
   return (
-    <div className="flex flex-col gap-x-3 py-4 px-2 border-b">
+    <div className="flex flex-col gap-x-3 p-4 border-b">
       <p className="font-semibold text-md">{title}</p>
       {description && (
         <p className="text-sm text-muted-foreground">{description}</p>
