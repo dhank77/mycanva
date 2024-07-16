@@ -134,6 +134,7 @@ export const buildEditor = ({
       addTextbox: (text, options) => {
          const value = new fabric.Textbox(text, {
             type: "textbox",
+            width: 250,
             ...options
          })
          setCenterObject(value);
