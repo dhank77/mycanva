@@ -259,6 +259,21 @@ export const buildEditor = ({
          const value = selected.get("linethrough") || false;
          return value;
       },
+      changeAlign: (align) => {
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            if(isTypeText(object.type)){
+               //@ts-ignore
+               object.set("textAlign", align);
+            }
+         });
+         canvas.renderAll();
+      },
+      getAlign: () => {
+         if(!selected) return "left";
+         //@ts-ignore
+         const value = selected.get("textAlign") || "left";
+         return value;
+      },
 
       getFillColor: () => {
          if(!selected) return fillColor;

@@ -2,7 +2,7 @@ import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn, isTypeText } from "@/lib/utils";
-import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
+import { AlignCenter, AlignLeft, AlignRight, ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
 import { FaBold, FaItalic, FaStrikethrough, FaUnderline } from "react-icons/fa";
@@ -19,6 +19,7 @@ export const Toolbar = ({
    const italic = editor?.getItalic() || "normal";
    const underline = editor?.getUnderline() || false;
    const linethrough = editor?.getLinethrough() || false;
+   const align = editor?.getAlign() || "left";
 
    const typeObject = editor?.selectedObject[0]?.type;
    const isText = isTypeText(typeObject);
@@ -28,6 +29,7 @@ export const Toolbar = ({
       italic : italic,
       underline : underline,
       linethrough : linethrough,
+      align : align,
 
       color : color,
       strokeColor : strokeColor,
@@ -67,6 +69,15 @@ export const Toolbar = ({
       setProperties({
          ...properties,
          linethrough : properties.linethrough == true ? false : true
+      })
+   };
+   const setAlign = (value : string) => {
+      if (editor) {
+         editor.changeAlign(value);
+      }
+      setProperties({
+         ...properties,
+         align : value,
       })
    };
 
@@ -204,6 +215,51 @@ export const Toolbar = ({
                      )}
                   >
                      <FaStrikethrough />
+                  </Button>
+               </Hint>
+            )}
+            {isText && (
+               <Hint label="Align Left" side="bottom">
+                  <Button
+                     onClick={() => setAlign("left")}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        properties.align == "left" && "bg-gray-100"
+                     )}
+                  >
+                     <AlignLeft className="size-4" />
+                  </Button>
+               </Hint>
+            )}
+            {isText && (
+               <Hint label="Align Center" side="bottom">
+                  <Button
+                     onClick={() => setAlign("center")}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        properties.align == "center" && "bg-gray-100"
+                     )}
+                  >
+                     <AlignCenter className="size-4" />
+                  </Button>
+               </Hint>
+            )}
+            {isText && (
+               <Hint label="Align Right" side="bottom">
+                  <Button
+                     onClick={() => setAlign("right")}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        properties.align == "right" && "bg-gray-100"
+                     )}
+                  >
+                     <AlignRight className="size-4" />
                   </Button>
                </Hint>
             )}
