@@ -5,7 +5,7 @@ import { cn, isTypeText } from "@/lib/utils";
 import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
-import { FaBold, FaItalic } from "react-icons/fa";
+import { FaBold, FaItalic, FaUnderline } from "react-icons/fa";
 import { RxTransparencyGrid } from "react-icons/rx";
 
 export const Toolbar = ({
@@ -17,6 +17,7 @@ export const Toolbar = ({
    const strokeColor = editor?.getStrokeColor() ?? "black";
    const bold = editor?.getBold() || 400;
    const italic = editor?.getItalic() || "normal";
+   const underline = editor?.getUnderline() || false;
 
    const typeObject = editor?.selectedObject[0]?.type;
    const isText = isTypeText(typeObject);
@@ -24,6 +25,7 @@ export const Toolbar = ({
    const [properties, setProperties] = useState({
       bold : bold,
       italic : italic,
+      underline : underline,
 
       color : color,
       strokeColor : strokeColor,
@@ -45,6 +47,15 @@ export const Toolbar = ({
       setProperties({
          ...properties,
          italic : properties.italic == "italic" ? "normal" : "italic"
+      })
+   };
+   const toggleUnderline = () => {
+      if (editor) {
+         editor.changeUnderline();
+      }
+      setProperties({
+         ...properties,
+         underline : properties.underline == true ? false : true
       })
    };
 
@@ -152,6 +163,21 @@ export const Toolbar = ({
                      )}
                   >
                      <FaItalic />
+                  </Button>
+               </Hint>
+            )}
+            {isText && (
+               <Hint label="Underline" side="bottom">
+                  <Button
+                     onClick={() => toggleUnderline()}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        properties.underline && "bg-gray-100"
+                     )}
+                  >
+                     <FaUnderline />
                   </Button>
                </Hint>
             )}

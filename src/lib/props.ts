@@ -37,6 +37,7 @@ export interface EditorProps {
    changeFont: (font: string) => void;
    changeBold: () => void;
    changeItalic: () => void;
+   changeUnderline: () => void;
   
    getFillColor: () => string;
    getStrokeColor: () => string;
@@ -44,6 +45,7 @@ export interface EditorProps {
    getFont: () => string;
    getBold: () => number;
    getItalic: () => string;
+   getUnderline: () => boolean;
 
    bringToFront: () => void;
    sendToBack: () => void;

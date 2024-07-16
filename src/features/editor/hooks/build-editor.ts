@@ -176,7 +176,7 @@ export const buildEditor = ({
          const value = selected.get("fontWeight") || 400;
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             if(isTypeText(object.type)){
-               if(value == 400){
+               if(value != 700){
                   //@ts-ignore
                   object.set("fontWeight", 700);
                }else{
@@ -213,6 +213,28 @@ export const buildEditor = ({
          if(!selected) return "normal";
          //@ts-ignore
          const value = selected.get("fontStyle") || "normal";
+         return value;
+      },
+      changeUnderline: () => {
+         //@ts-ignore
+         const value = selected.get("underline") || false;
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            if(isTypeText(object.type)){
+               if(!value){
+                  //@ts-ignore
+                  object.set("underline", true);
+               }else{
+                  //@ts-ignore
+                  object.set("underline", false);
+               }
+            }
+         });
+         canvas.renderAll();
+      },
+      getUnderline: () => {
+         if(!selected) return false;
+         //@ts-ignore
+         const value = selected.get("underline") || false;
          return value;
       },
 
