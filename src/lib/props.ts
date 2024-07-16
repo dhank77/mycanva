@@ -35,11 +35,13 @@ export interface EditorProps {
    changeStrokeWidth: (width: number) => void;
    changeOpacity: (opacity: number) => void;
    changeFont: (font: string) => void;
+   changeBold: () => void;
   
    getFillColor: () => string;
    getStrokeColor: () => string;
    getStrokeWidth: () => number;
    getFont: () => string;
+   getBold: () => number;
 
    bringToFront: () => void;
    sendToBack: () => void;
@@ -59,6 +61,7 @@ export interface BuildEditorProps {
    strokeColor: string;
    strokeWidth: number;
    selectedObject: fabric.Object[];
+
    setFont: (font: string) => void;
    setFillColor: (color: string) => void;
    setStrokeColor: (color: string) => void;

@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn, isTypeText } from "@/lib/utils";
 import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
+import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
+import { FaBold } from "react-icons/fa";
 import { RxTransparencyGrid } from "react-icons/rx";
 
 export const Toolbar = ({
@@ -13,9 +15,26 @@ export const Toolbar = ({
 }: ActiveToolEditorProps) => {
    const color = editor?.getFillColor() ?? "black";
    const strokeColor = editor?.getStrokeColor() ?? "black";
+   const bold = editor?.getBold() || 400;
 
    const typeObject = editor?.selectedObject[0]?.type;
    const isText = isTypeText(typeObject);
+
+   const [properties, setProperties] = useState({
+      bold : bold,
+      color : color,
+      strokeColor : strokeColor,
+   })
+
+   const toggleBold = () => {
+      if (editor) {
+         editor.changeBold();
+      }
+      setProperties({
+         ...properties,
+         bold : properties.bold == 400 ? 700 : 400
+      })
+   };
 
    if (editor?.selectedObject.length === 0) {
       return <div className="w-full mx-4 h-[56px] z-[49] flex gap-x-2" />;
@@ -35,7 +54,7 @@ export const Toolbar = ({
                      className="size-4 rounded-sm border"
                      style={{
                         backgroundColor:
-                           typeof color === "string" ? color : "black",
+                           typeof properties.color === "string" ? properties.color : "black",
                      }}
                   />
                </Button>
@@ -53,7 +72,7 @@ export const Toolbar = ({
                      <div
                         className="size-4 rounded-sm border-2"
                         style={{
-                           borderColor: strokeColor,
+                           borderColor: properties.strokeColor,
                         }}
                      />
                   </Button>
@@ -74,7 +93,7 @@ export const Toolbar = ({
                </Hint>
             )}
             {isText && (
-               <Hint label="Border Width" side="bottom">
+               <Hint label="Font" side="bottom">
                   <Button
                      onClick={() => setActiveTool("font")}
                      variant="ghost"
@@ -88,6 +107,21 @@ export const Toolbar = ({
                         <span className="truncate">{editor?.getFont()}</span>
                         <ChevronDown className="size-4" />
                      </div>
+                  </Button>
+               </Hint>
+            )}
+            {isText && (
+               <Hint label="Bold" side="bottom">
+                  <Button
+                     onClick={() => toggleBold()}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        properties.bold > 500 && "bg-gray-100"
+                     )}
+                  >
+                     <FaBold />
                   </Button>
                </Hint>
             )}

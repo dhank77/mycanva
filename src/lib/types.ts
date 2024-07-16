@@ -12,6 +12,10 @@ export type ActiveToolTypes =
    | "send-back"
    | "opacity"
    | "font"
+   | "bold"
+   | "italic"
+   | "underline"
+   | "linethrough"
 
    // side menu
    | "design"

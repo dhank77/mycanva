@@ -32,6 +32,8 @@ export const buildEditor = ({
       canvas.setActiveObject(object);
    };
 
+   const selected = selectedObject[0];
+
    return {
       changeOpacity: (opacity: number) => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
@@ -53,14 +55,12 @@ export const buildEditor = ({
             if(isTypeText(object.type)){
                object.set("fill", color);
             }
-            
             object.set("stroke", color);
          });
          canvas.renderAll();
       },
       changeStrokeWidth: (width: number) => {
          setStrokeWidth(width);
-
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             object.set("strokeWidth", width);
          });
@@ -68,10 +68,11 @@ export const buildEditor = ({
       },
       changeFont: (value: string) => {
          setFont(value);
-
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            //@ts-ignore
-            object.set("fontFamily", value);
+            if(isTypeText(object.type)){
+               //@ts-ignore
+               object.set("fontFamily", value);
+            }
          });
          canvas.renderAll();
       },
@@ -169,26 +170,45 @@ export const buildEditor = ({
          canvas.renderAll();
          lokalWorkspace?.sendToBack();
       },
+      changeBold: () => {
+         //@ts-ignore
+         const value = selected.get("fontWeight") || 400;
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            if(isTypeText(object.type)){
+               if(value == 400){
+                  //@ts-ignore
+                  object.set("fontWeight", 700);
+               }else{
+                  //@ts-ignore
+                  object.set("fontWeight", 400);
+               }
+            }
+         });
+         canvas.renderAll();
+      },
+      getBold: () => {
+         if(!selected) return 400;
+         //@ts-ignore
+         const value = selected.get("fontWeight") || 400;
+         return value;
+      },
+
       getFillColor: () => {
-         const selected = selectedObject[0];
          if(!selected) return fillColor;
          const value = selected.fill || fillColor;
          return value as string;
       },
       getStrokeColor: () => {
-         const selected = selectedObject[0];
          if(!selected) return strokeColor;
          const value = selected.stroke || strokeColor;
          return value as string;
       },
       getStrokeWidth: () => {
-         const selected = selectedObject[0];
          if(!selected) return strokeWidth;
          const value = selected.strokeWidth || strokeWidth;
          return value;
       },
       getFont: () => {
-         const selected = selectedObject[0];
          if(!selected) return font;
          //@ts-ignore
          const value = selected.get("fontFamily") || font;
