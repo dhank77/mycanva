@@ -46,4 +46,5 @@ export const closeSideBarTools = [
    "fill", 
    "stroke-color",
    "stroke-width",
+   "opacity",
 ];
