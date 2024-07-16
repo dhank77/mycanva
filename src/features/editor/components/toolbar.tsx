@@ -5,7 +5,7 @@ import { cn, isTypeText } from "@/lib/utils";
 import { ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
-import { FaBold, FaItalic, FaUnderline } from "react-icons/fa";
+import { FaBold, FaItalic, FaStrikethrough, FaUnderline } from "react-icons/fa";
 import { RxTransparencyGrid } from "react-icons/rx";
 
 export const Toolbar = ({
@@ -18,6 +18,7 @@ export const Toolbar = ({
    const bold = editor?.getBold() || 400;
    const italic = editor?.getItalic() || "normal";
    const underline = editor?.getUnderline() || false;
+   const linethrough = editor?.getLinethrough() || false;
 
    const typeObject = editor?.selectedObject[0]?.type;
    const isText = isTypeText(typeObject);
@@ -26,6 +27,7 @@ export const Toolbar = ({
       bold : bold,
       italic : italic,
       underline : underline,
+      linethrough : linethrough,
 
       color : color,
       strokeColor : strokeColor,
@@ -56,6 +58,15 @@ export const Toolbar = ({
       setProperties({
          ...properties,
          underline : properties.underline == true ? false : true
+      })
+   };
+   const toggleLinethrough = () => {
+      if (editor) {
+         editor.changeLinethrough();
+      }
+      setProperties({
+         ...properties,
+         linethrough : properties.linethrough == true ? false : true
       })
    };
 
@@ -178,6 +189,21 @@ export const Toolbar = ({
                      )}
                   >
                      <FaUnderline />
+                  </Button>
+               </Hint>
+            )}
+            {isText && (
+               <Hint label="Strike Through" side="bottom">
+                  <Button
+                     onClick={() => toggleLinethrough()}
+                     variant="ghost"
+                     size="icon"
+                     className={cn(
+                        "w-auto p-2",
+                        properties.linethrough && "bg-gray-100"
+                     )}
+                  >
+                     <FaStrikethrough />
                   </Button>
                </Hint>
             )}

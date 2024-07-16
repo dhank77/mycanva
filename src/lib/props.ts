@@ -38,6 +38,7 @@ export interface EditorProps {
    changeBold: () => void;
    changeItalic: () => void;
    changeUnderline: () => void;
+   changeLinethrough: () => void;
   
    getFillColor: () => string;
    getStrokeColor: () => string;
@@ -46,6 +47,7 @@ export interface EditorProps {
    getBold: () => number;
    getItalic: () => string;
    getUnderline: () => boolean;
+   getLinethrough: () => boolean;
 
    bringToFront: () => void;
    sendToBack: () => void;

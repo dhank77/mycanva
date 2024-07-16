@@ -237,6 +237,28 @@ export const buildEditor = ({
          const value = selected.get("underline") || false;
          return value;
       },
+      changeLinethrough: () => {
+         //@ts-ignore
+         const value = selected.get("linethrough") || false;
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            if(isTypeText(object.type)){
+               if(!value){
+                  //@ts-ignore
+                  object.set("linethrough", true);
+               }else{
+                  //@ts-ignore
+                  object.set("linethrough", false);
+               }
+            }
+         });
+         canvas.renderAll();
+      },
+      getLinethrough: () => {
+         if(!selected) return false;
+         //@ts-ignore
+         const value = selected.get("linethrough") || false;
+         return value;
+      },
 
       getFillColor: () => {
          if(!selected) return fillColor;
