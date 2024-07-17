@@ -2,10 +2,11 @@ import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn, isTypeText } from "@/lib/utils";
-import { AlignCenter, AlignLeft, AlignRight, ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown } from "lucide-react";
+import { AlignCenter, AlignLeft, AlignRight, ArrowDownCircleIcon, ArrowUpCircleIcon, ChevronDown, FlipHorizontal, FlipVertical } from "lucide-react";
 import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
 import { FaBold, FaItalic, FaStrikethrough, FaUnderline } from "react-icons/fa";
+import { FaRotateLeft, FaRotateRight } from "react-icons/fa6";
 import { RxTransparencyGrid } from "react-icons/rx";
 
 export const Toolbar = ({
@@ -79,6 +80,11 @@ export const Toolbar = ({
          ...properties,
          align : value,
       })
+   };
+   const setRotate = (value : number) => {
+      if (editor) {
+         editor.changeRotate(value);
+      }
    };
 
    console.log(properties);
@@ -263,6 +269,26 @@ export const Toolbar = ({
                   </Button>
                </Hint>
             )}
+            <Hint label="Rotate Left" side="bottom">
+               <Button
+                  onClick={() => setRotate(-90)}
+                  variant="ghost"
+                  size="icon"
+                  className="w-auto p-2"
+               >
+                  <FaRotateLeft className="size-4" />
+               </Button>
+            </Hint>
+            <Hint label="Rotate Right" side="bottom">
+               <Button
+                  onClick={() => setRotate(90)}
+                  variant="ghost"
+                  size="icon"
+                  className="w-auto p-2"
+               >
+                  <FaRotateRight className="size-4" />
+               </Button>
+            </Hint>
             <Hint label="Bring to front" side="bottom">
                <Button
                   onClick={() => editor?.bringToFront()}

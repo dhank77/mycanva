@@ -274,6 +274,13 @@ export const buildEditor = ({
          const value = selected.get("textAlign") || "left";
          return value;
       },
+      changeRotate: (deg) => {
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            const angleNow = object.get("angle") || 0;
+            object.set("angle", angleNow + deg);
+         });
+         canvas.renderAll();
+      },
 
       getFillColor: () => {
          if(!selected) return fillColor;

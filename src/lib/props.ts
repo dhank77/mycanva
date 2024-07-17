@@ -40,6 +40,7 @@ export interface EditorProps {
    changeUnderline: () => void;
    changeLinethrough: () => void;
    changeAlign: (value: string) => void;
+   changeRotate: (value: number) => void;
   
    getFillColor: () => string;
    getStrokeColor: () => string;
