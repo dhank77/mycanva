@@ -15,6 +15,7 @@ import { BorderWidthSidebar } from "./toolbar/border-width-sidebar";
 import { OpacitySidebar } from "./toolbar/opacity-sidebar";
 import { TextSidebar } from "./sidebar/text-sidebar";
 import { FontSidebar } from "./toolbar/font-sidebar";
+import { ImagesSidebar } from "./sidebar/images-sidebar";
 
 export const Editor = () => {
 
@@ -76,6 +77,11 @@ export const Editor = () => {
                setActiveTool={onChangeActiveTool}
             />
             <TextSidebar
+               editor={editor}
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+            <ImagesSidebar
                editor={editor}
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}

@@ -1,10 +1,9 @@
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { ToolHeader } from "../tools/tool-header";
 import { ToolClose } from "../tools/tool-close";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
