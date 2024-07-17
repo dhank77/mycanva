@@ -7,6 +7,7 @@ import { useGetImages } from "@/features/images/api/use-get-images";
 import { AlertTriangle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export const ImagesSidebar = ({
   editor,
@@ -36,34 +37,29 @@ export const ImagesSidebar = ({
         </div>
       )}
       <ScrollArea>
-        <div className="grid grid-cols-2 gap-4 p-4">
-          {data?.map((image) => (
-            <></>
-          ))}
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={() => {}}
-          >
-            <Image 
-              src="/next.svg"
-              width="200"
-              height="200"
-              alt="logo"
-            />.
-          </Button>
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={() => {}}
-          >
-            <Image 
-              src="/next.svg"
-              width="200"
-              height="200"
-              alt="logo"
-            />.
-          </Button>
+        <div className="p-4 grid grid-cols-2 gap-4">
+          {data &&
+            data.map((image) => (
+              <button
+                key={image.id}
+                className="relative w-full h-[100px] group rounded-sm overflow-hidden border transition hover:opacity-90"
+                onClick={() => {}}
+              >
+                <Image
+                  fill
+                  className="object-cover"
+                  src={image.urls.small}
+                  alt={image.alt_description || "image"}
+                />
+                <Link
+                  target="_blank"
+                  className="opacity-0 group-hover:opacity-100 absolute left-0 bottom-0 w-full hover:underline bg-black/50 text-white text-left text-[10px] font-bold truncate p-1"
+                  href={image.links.html}
+                >
+                  {image.user.username}
+                </Link>
+              </button>
+            ))}
         </div>
       </ScrollArea>
 
