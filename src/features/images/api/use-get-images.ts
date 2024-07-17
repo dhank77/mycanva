@@ -1,7 +1,12 @@
 import { apiClient } from "@/lib/hono";
 import { useQuery } from "@tanstack/react-query";
+import { ActiveToolTypes } from '@/lib/types';
 
-export const useGetImages = () => {
+export const useGetImages = ({
+  activeTool,
+} : {
+  activeTool? : ActiveToolTypes | undefined,
+}) => {
   const query = useQuery({
     queryKey: ["images"],
     queryFn: async () => {
@@ -14,6 +19,7 @@ export const useGetImages = () => {
       const { data } = await response.json();
       return data;
     },
+    enabled: activeTool == 'image',
   });
   return query;
 };

@@ -9,13 +9,17 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { UploadButton } from "@/lib/uploadthing";
+import { useCallback, useEffect, useState } from "react";
+
+import { Basic } from "unsplash-js/dist/methods/photos/types";
 
 export const ImagesSidebar = ({
    editor,
    activeTool,
    setActiveTool,
 }: ActiveToolEditorProps) => {
-   const { data, isLoading, isError } = useGetImages();
+   const { data, isLoading, isError } = useGetImages({activeTool});
+
    return (
       <aside
          className={cn(
