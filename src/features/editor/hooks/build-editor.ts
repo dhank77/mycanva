@@ -151,6 +151,16 @@ export const buildEditor = ({
          })
          setCenterObject(value);
       },
+      addImage: (url) => {
+         fabric.Image.fromURL(url, (image) => {
+
+            image.scaleToHeight(lokalWorkspace?.height || 0);
+            image.scaleToWidth(lokalWorkspace?.width || 0);
+            setCenterObject(image);
+         },{
+            crossOrigin: "anonymous",
+         })
+      },
       
       // value toolbar
       canvas,

@@ -29,6 +29,7 @@ export interface EditorProps {
    addTriangle180: () => void;
    addDiamond: () => void;
    addTextbox: (text: string, options? : ITextOptions) => void;
+   addImage: (url: string) => void;
 
    changeFillColor: (color: string) => void;
    changeStrokeColor: (color: string) => void;

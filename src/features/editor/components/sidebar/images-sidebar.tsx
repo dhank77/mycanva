@@ -43,7 +43,7 @@ export const ImagesSidebar = ({
               <button
                 key={image.id}
                 className="relative w-full h-[100px] group rounded-sm overflow-hidden border transition hover:opacity-90"
-                onClick={() => {}}
+                onClick={() => editor?.addImage(image.urls.full)}
               >
                 <Image
                   fill
