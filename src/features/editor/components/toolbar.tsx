@@ -12,6 +12,7 @@ import {
   ChevronDown,
   FlipHorizontal,
   FlipVertical,
+  Trash,
 } from "lucide-react";
 import { useState } from "react";
 import { BsBorderWidth } from "react-icons/bs";
@@ -341,6 +342,16 @@ export const Toolbar = ({
               className={cn("p-2", activeTool == "opacity" && "bg-gray-100")}
             >
               <RxTransparencyGrid className="size-5" />
+            </Button>
+          </Hint>
+          <Hint label="Opacity" side="bottom">
+            <Button
+              onClick={() => editor?.delete()}
+              variant="ghost"
+              size="icon"
+              className="p-2"
+            >
+              <Trash className="size-5" />
             </Button>
           </Hint>
         </div>

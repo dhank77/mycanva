@@ -57,6 +57,8 @@ export interface EditorProps {
    bringToFront: () => void;
    sendToBack: () => void;
 
+   delete: () => void;
+
    canvas: fabric.Canvas;
    selectedObject: fabric.Object[];
 }

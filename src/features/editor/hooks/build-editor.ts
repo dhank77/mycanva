@@ -318,6 +318,13 @@ export const buildEditor = ({
          const value = selected.get("fontFamily") || font;
          return value;
       },
+      delete: () => {
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            canvas.remove(object);
+         })
+         canvas.discardActiveObject();
+         canvas.renderAll();
+      },
       selectedObject,
    };
 };
