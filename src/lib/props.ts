@@ -41,6 +41,7 @@ export interface EditorProps {
    changeLinethrough: () => void;
    changeAlign: (value: string) => void;
    changeRotate: (value: number) => void;
+   changeFontSize: (value: number) => void;
   
    getFillColor: () => string;
    getStrokeColor: () => string;
@@ -51,6 +52,7 @@ export interface EditorProps {
    getUnderline: () => boolean;
    getLinethrough: () => boolean;
    getAlign: () => boolean;
+   getFontSize: () => number;
 
    bringToFront: () => void;
    sendToBack: () => void;

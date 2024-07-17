@@ -18,6 +18,7 @@ import { BsBorderWidth } from "react-icons/bs";
 import { FaBold, FaItalic, FaStrikethrough, FaUnderline } from "react-icons/fa";
 import { FaRotateLeft, FaRotateRight } from "react-icons/fa6";
 import { RxTransparencyGrid } from "react-icons/rx";
+import { ToolFontSize } from "./tools/tool-fontsize";
 
 export const Toolbar = ({
   editor,
@@ -31,8 +32,10 @@ export const Toolbar = ({
   const underline = editor?.getUnderline() || false;
   const linethrough = editor?.getLinethrough() || false;
   const align = editor?.getAlign() || "left";
+  const fontSize = editor?.getFontSize() || 32;
 
-  const typeObject = editor?.selectedObject[0]?.type;
+  const selectedObject = editor?.selectedObject[0];
+  const typeObject = selectedObject?.type;
   const isText = isTypeText(typeObject);
 
   const [properties, setProperties] = useState({
@@ -41,51 +44,49 @@ export const Toolbar = ({
     underline: underline,
     linethrough: linethrough,
     align: align,
+    fontSize: fontSize,
 
     color: color,
     strokeColor: strokeColor,
   });
 
   const toggleBold = () => {
-    if (editor) {
-      editor.changeBold();
-    }
+   if (!selectedObject) return null;
+    if (editor) editor.changeBold();
     setProperties({
       ...properties,
       bold: properties.bold == 400 ? 700 : 400,
     });
   };
   const toogleItalic = () => {
-    if (editor) {
-      editor.changeItalic();
-    }
+   if (!selectedObject) return null;
+    if (editor) editor.changeItalic();
     setProperties({
       ...properties,
       italic: properties.italic == "italic" ? "normal" : "italic",
     });
   };
   const toggleUnderline = () => {
-    if (editor) {
-      editor.changeUnderline();
-    }
+    if (!selectedObject) return null;
+    if (editor) editor.changeUnderline();
     setProperties({
       ...properties,
       underline: properties.underline == true ? false : true,
     });
   };
   const toggleLinethrough = () => {
-    if (editor) {
-      editor.changeLinethrough();
-    }
+    if (!selectedObject) return null;
+    if (editor) editor.changeLinethrough();
+
     setProperties({
       ...properties,
       linethrough: properties.linethrough == true ? false : true,
     });
   };
   const setAlign = (value: string) => {
-    if (editor) {
-      editor.changeAlign(value);
-    }
+    if (!selectedObject) return null;
+    if (editor) editor.changeAlign(value);
+
     setProperties({
       ...properties,
       align: value,
@@ -95,6 +96,16 @@ export const Toolbar = ({
     if (editor) {
       editor.changeRotate(value);
     }
+  };
+
+  const handleChangeFontSize = (value: number) => {
+    if (!selectedObject) return null;
+    if (editor) editor.changeFontSize(value);
+
+    setProperties({
+      ...properties,
+      fontSize: value,
+    });
   };
 
   if (editor?.selectedObject.length === 0) {
@@ -275,6 +286,12 @@ export const Toolbar = ({
                 <AlignRight className="size-4" />
               </Button>
             </Hint>
+          )}
+          {isText && (
+            <ToolFontSize
+              value={properties.fontSize}
+              onChange={handleChangeFontSize}
+            />
           )}
           <Hint label="Rotate Left" side="bottom">
             <Button

@@ -274,6 +274,21 @@ export const buildEditor = ({
          const value = selected.get("textAlign") || "left";
          return value;
       },
+      changeFontSize: (size) => {
+         canvas.getActiveObjects().forEach((object: fabric.Object) => {
+            if(isTypeText(object.type)){
+               //@ts-ignore
+               object.set("fontSize", size);
+            }
+         });
+         canvas.renderAll();
+      },
+      getFontSize: () => {
+         if(!selected) return 32;
+         //@ts-ignore
+         const value = selected.get("fontSize") || 32;
+         return value;
+      },
       changeRotate: (deg) => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             const angleNow = object.get("angle") || 0;
