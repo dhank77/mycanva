@@ -1,6 +1,6 @@
 import { fabric } from "fabric";
 import { BuildEditorProps, EditorProps } from "@/lib/props";
-import { isTypeText } from "@/lib/utils";
+import { createFilter, isTypeText } from "@/lib/utils";
 
 export const buildEditor = ({
    canvas,
@@ -14,12 +14,15 @@ export const buildEditor = ({
    setStrokeWidth,
    selectedObject,
 }: BuildEditorProps): EditorProps => {
-   const lokalWorkspace = canvas
-         .getObjects()
-         .find((obj) => obj.name == "clip");
+   const lokalWorkspace = () => {
+      return canvas
+      .getObjects()
+      .find((obj) => obj.name == "clip");
+   };
 
    const center = (object: fabric.Object) => {
-      const centerPoint = lokalWorkspace?.getCenterPoint();
+      const workspace = lokalWorkspace();
+      const centerPoint = workspace?.getCenterPoint();
       if (!centerPoint) return;
 
       //@ts-ignore
@@ -153,13 +156,30 @@ export const buildEditor = ({
       },
       addImage: (url) => {
          fabric.Image.fromURL(url, (image) => {
+            const workspace = lokalWorkspace();
 
-            image.scaleToHeight(lokalWorkspace?.height || 0);
-            image.scaleToWidth(lokalWorkspace?.width || 0);
+            image.scaleToHeight(workspace?.height || 0);
+            image.scaleToWidth(workspace?.width || 0);
             setCenterObject(image);
          },{
             crossOrigin: "anonymous",
          })
+      },
+      setFilter: (filter) => {
+         const objects = canvas.getActiveObjects();
+         objects.forEach((object) => {
+            if(object.type == "image"){
+               const imageObject = object as fabric.Image;
+               const effect = createFilter(filter);
+               imageObject.filters = effect ? [effect] : [];
+               imageObject.applyFilters();
+               imageObject.set({
+                  width: imageObject.width,
+                  height: imageObject.height
+                });
+               canvas.renderAll();
+            }
+         });
       },
       
       // value toolbar
@@ -170,7 +190,8 @@ export const buildEditor = ({
          })
 
          canvas.renderAll();
-         lokalWorkspace?.sendToBack();
+         const workspace = lokalWorkspace();
+         workspace?.sendToBack();
       },
       sendToBack: () => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
@@ -178,7 +199,8 @@ export const buildEditor = ({
          })
 
          canvas.renderAll();
-         lokalWorkspace?.sendToBack();
+         const workspace = lokalWorkspace();
+         workspace?.sendToBack();
       },
 
       changeBold: () => {

@@ -57,6 +57,7 @@ export interface EditorProps {
 
    bringToFront: () => void;
    sendToBack: () => void;
+   setFilter: (filter: string) => void;
 
    delete: () => void;
 

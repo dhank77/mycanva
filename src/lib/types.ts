@@ -16,6 +16,7 @@ export type ActiveToolTypes =
    | "italic"
    | "underline"
    | "linethrough"
+   | "filter"
 
    // side menu
    | "design"
@@ -74,3 +75,30 @@ export const closeSideBarTools = [
    "stroke-width",
    "opacity",
 ];
+
+export const filters = [
+   "none",
+   "polaroid",
+   "sepia",
+   "kodachrome",
+   "contrast",
+   "brightness",
+   "greyscale",
+   "brownie",
+   "vintage",
+   "technicolor",
+   "pixelate",
+   "invert",
+   "blur",
+   "sharpen",
+   "emboss",
+   "removecolor",
+   "blacknwhite",
+   "vibrance",
+   "blendcolor",
+   "huerotate",
+   "resize",
+   "saturation",
+   "gamma",
+ ];
+ 
