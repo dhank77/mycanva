@@ -15,9 +15,7 @@ export const buildEditor = ({
    selectedObject,
 }: BuildEditorProps): EditorProps => {
    const lokalWorkspace = () => {
-      return canvas
-      .getObjects()
-      .find((obj) => obj.name == "clip");
+      return canvas.getObjects().find((obj) => obj.name == "clip");
    };
 
    const center = (object: fabric.Object) => {
@@ -55,7 +53,7 @@ export const buildEditor = ({
       changeStrokeColor: (color: string) => {
          setStrokeColor(color);
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
+            if (isTypeText(object.type)) {
                object.set("fill", color);
             }
             object.set("stroke", color);
@@ -72,7 +70,7 @@ export const buildEditor = ({
       changeFont: (value: string) => {
          setFont(value);
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
+            if (isTypeText(object.type)) {
                //@ts-ignore
                object.set("fontFamily", value);
             }
@@ -110,7 +108,7 @@ export const buildEditor = ({
             strokeWidth: strokeWidth ?? 10,
             stroke: strokeColor ?? "black",
          });
-         
+
          setCenterObject(square);
       },
       addTriangle: () => {
@@ -150,44 +148,49 @@ export const buildEditor = ({
          const value = new fabric.Textbox(text, {
             type: "textbox",
             width: 250,
-            ...options
-         })
+            ...options,
+         });
          setCenterObject(value);
       },
       addImage: (url) => {
-         fabric.Image.fromURL(url, (image) => {
-            const workspace = lokalWorkspace();
+         fabric.Image.fromURL(
+            url,
+            (image) => {
+               const workspace = lokalWorkspace();
 
-            image.scaleToHeight(workspace?.height || 0);
-            image.scaleToWidth(workspace?.width || 0);
-            setCenterObject(image);
-         },{
-            crossOrigin: "anonymous",
-         })
+               image.scaleToHeight(workspace?.height || 0);
+               image.scaleToWidth(workspace?.width || 0);
+               fabric.textureSize = 8000;
+               setCenterObject(image);
+            },
+            {
+               crossOrigin: "anonymous",
+            }
+         );
       },
       setFilter: (filter) => {
          const objects = canvas.getActiveObjects();
          objects.forEach((object) => {
-            if(object.type == "image"){
+            if (object.type == "image") {
                const imageObject = object as fabric.Image;
                const effect = createFilter(filter);
                imageObject.filters = effect ? [effect] : [];
                imageObject.applyFilters();
                imageObject.set({
                   width: imageObject.width,
-                  height: imageObject.height
-                });
+                  height: imageObject.height,
+               });
                canvas.renderAll();
             }
          });
       },
-      
+
       // value toolbar
       canvas,
       bringToFront: () => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             object.bringToFront();
-         })
+         });
 
          canvas.renderAll();
          const workspace = lokalWorkspace();
@@ -195,8 +198,8 @@ export const buildEditor = ({
       },
       sendToBack: () => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            object.sendBackwards(); 
-         })
+            object.sendBackwards();
+         });
 
          canvas.renderAll();
          const workspace = lokalWorkspace();
@@ -207,11 +210,11 @@ export const buildEditor = ({
          //@ts-ignore
          const value = selected.get("fontWeight") || 400;
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
-               if(value != 700){
+            if (isTypeText(object.type)) {
+               if (value != 700) {
                   //@ts-ignore
                   object.set("fontWeight", 700);
-               }else{
+               } else {
                   //@ts-ignore
                   object.set("fontWeight", 400);
                }
@@ -220,7 +223,7 @@ export const buildEditor = ({
          canvas.renderAll();
       },
       getBold: () => {
-         if(!selected) return 400;
+         if (!selected) return 400;
          //@ts-ignore
          const value = selected.get("fontWeight") || 400;
          return value;
@@ -229,11 +232,11 @@ export const buildEditor = ({
          //@ts-ignore
          const value = selected.get("fontStyle") || "normal";
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
-               if(value == "normal"){
+            if (isTypeText(object.type)) {
+               if (value == "normal") {
                   //@ts-ignore
                   object.set("fontStyle", "italic");
-               }else{
+               } else {
                   //@ts-ignore
                   object.set("fontStyle", "normal");
                }
@@ -242,7 +245,7 @@ export const buildEditor = ({
          canvas.renderAll();
       },
       getItalic: () => {
-         if(!selected) return "normal";
+         if (!selected) return "normal";
          //@ts-ignore
          const value = selected.get("fontStyle") || "normal";
          return value;
@@ -251,11 +254,11 @@ export const buildEditor = ({
          //@ts-ignore
          const value = selected.get("underline") || false;
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
-               if(!value){
+            if (isTypeText(object.type)) {
+               if (!value) {
                   //@ts-ignore
                   object.set("underline", true);
-               }else{
+               } else {
                   //@ts-ignore
                   object.set("underline", false);
                }
@@ -264,7 +267,7 @@ export const buildEditor = ({
          canvas.renderAll();
       },
       getUnderline: () => {
-         if(!selected) return false;
+         if (!selected) return false;
          //@ts-ignore
          const value = selected.get("underline") || false;
          return value;
@@ -273,11 +276,11 @@ export const buildEditor = ({
          //@ts-ignore
          const value = selected.get("linethrough") || false;
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
-               if(!value){
+            if (isTypeText(object.type)) {
+               if (!value) {
                   //@ts-ignore
                   object.set("linethrough", true);
-               }else{
+               } else {
                   //@ts-ignore
                   object.set("linethrough", false);
                }
@@ -286,14 +289,14 @@ export const buildEditor = ({
          canvas.renderAll();
       },
       getLinethrough: () => {
-         if(!selected) return false;
+         if (!selected) return false;
          //@ts-ignore
          const value = selected.get("linethrough") || false;
          return value;
       },
       changeAlign: (align) => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
+            if (isTypeText(object.type)) {
                //@ts-ignore
                object.set("textAlign", align);
             }
@@ -301,14 +304,14 @@ export const buildEditor = ({
          canvas.renderAll();
       },
       getAlign: () => {
-         if(!selected) return "left";
+         if (!selected) return "left";
          //@ts-ignore
          const value = selected.get("textAlign") || "left";
          return value;
       },
       changeFontSize: (size) => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
-            if(isTypeText(object.type)){
+            if (isTypeText(object.type)) {
                //@ts-ignore
                object.set("fontSize", size);
             }
@@ -316,7 +319,7 @@ export const buildEditor = ({
          canvas.renderAll();
       },
       getFontSize: () => {
-         if(!selected) return 32;
+         if (!selected) return 32;
          //@ts-ignore
          const value = selected.get("fontSize") || 32;
          return value;
@@ -330,22 +333,22 @@ export const buildEditor = ({
       },
 
       getFillColor: () => {
-         if(!selected) return fillColor;
+         if (!selected) return fillColor;
          const value = selected.fill || fillColor;
          return value as string;
       },
       getStrokeColor: () => {
-         if(!selected) return strokeColor;
+         if (!selected) return strokeColor;
          const value = selected.stroke || strokeColor;
          return value as string;
       },
       getStrokeWidth: () => {
-         if(!selected) return strokeWidth;
+         if (!selected) return strokeWidth;
          const value = selected.strokeWidth || strokeWidth;
          return value;
       },
       getFont: () => {
-         if(!selected) return font;
+         if (!selected) return font;
          //@ts-ignore
          const value = selected.get("fontFamily") || font;
          return value;
@@ -353,7 +356,7 @@ export const buildEditor = ({
       delete: () => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             canvas.remove(object);
-         })
+         });
          canvas.discardActiveObject();
          canvas.renderAll();
       },
