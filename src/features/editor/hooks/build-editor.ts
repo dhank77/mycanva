@@ -153,6 +153,7 @@ export const buildEditor = ({
          setCenterObject(value);
       },
       addImage: (url) => {
+         fabric.textureSize = 8000;
          fabric.Image.fromURL(
             url,
             (image) => {
@@ -160,7 +161,6 @@ export const buildEditor = ({
 
                image.scaleToHeight(workspace?.height || 0);
                image.scaleToWidth(workspace?.width || 0);
-               fabric.textureSize = 8000;
                setCenterObject(image);
             },
             {
