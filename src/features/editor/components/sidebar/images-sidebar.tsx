@@ -5,13 +5,9 @@ import { ToolHeader } from "../tools/tool-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useGetImages } from "@/features/images/api/use-get-images";
 import { AlertTriangle, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import { UploadButton } from "@/lib/uploadthing";
-import { useCallback, useEffect, useState } from "react";
-
-import { Basic } from "unsplash-js/dist/methods/photos/types";
+import Image from "next/image";
 
 export const ImagesSidebar = ({
    editor,
