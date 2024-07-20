@@ -17,6 +17,7 @@ export type ActiveToolTypes =
    | "underline"
    | "linethrough"
    | "filter"
+   | "remove-bg"
 
    // side menu
    | "design"
@@ -74,6 +75,7 @@ export const closeSideBarTools = [
    "stroke-color",
    "stroke-width",
    "opacity",
+   "remove-bg",
 ];
 
 export const filters = [

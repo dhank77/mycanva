@@ -54,6 +54,30 @@ const app = new Hono()
 
          return c.json({ data: result[0] });
       }
-   );
+   )
+   .post(
+      "/remove-bg",
+      zValidator(
+         "json",
+         z.object({
+            image: z.string(),
+         })
+      ),
+      async (c) => {
+         const { image } = c.req.valid("json");
 
+         const output: unknown = await replicate.run(
+            "cjwbw/rembg:fb8af171cfa1616ddcf1242c093f9c46bcada5ad4cf6f2fbe8b81b330ec5c003",
+            {
+              input: {
+                image: image,
+              }
+            }
+         );
+
+         const res = output as string;
+
+         return c.json({ data: res });
+      }
+   );
 export default app;

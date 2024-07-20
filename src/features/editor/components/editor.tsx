@@ -18,6 +18,7 @@ import { FontSidebar } from "./toolbar/font-sidebar";
 import { ImagesSidebar } from "./sidebar/images-sidebar";
 import { FilterColorSidebar } from "./toolbar/filter-color-sidebar";
 import { AiSidebar } from "./sidebar/ai-sidebar";
+import { RemoveBgSidebar } from "./toolbar/remove-bg-sidebar";
 
 export const Editor = () => {
 
@@ -125,6 +126,12 @@ export const Editor = () => {
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}
             />
+            <RemoveBgSidebar
+               editor={editor}
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+
             <main className="flex flex-col flex-1 bg-white overflow-auto">
                <Toolbar
                   editor={editor}

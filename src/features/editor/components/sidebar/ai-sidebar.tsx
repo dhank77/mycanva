@@ -55,7 +55,7 @@ export const AiSidebar = ({
             >
                Generate Image
                {mutation.isPending && <span className="ml-2 animate-spin transition">⏳</span>}
-            </Button>
+            </Button> 
          </form>
 
          <ToolClose onClick={() => setActiveTool("select")} />

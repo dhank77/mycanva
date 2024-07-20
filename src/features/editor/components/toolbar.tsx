@@ -10,6 +10,7 @@ import {
    ArrowDownCircleIcon,
    ArrowUpCircleIcon,
    ChevronDown,
+   EraserIcon,
    Trash,
 } from "lucide-react";
 import { useState } from "react";
@@ -19,6 +20,7 @@ import { FaRotateLeft, FaRotateRight } from "react-icons/fa6";
 import { RxTransparencyGrid } from "react-icons/rx";
 import { ToolFontSize } from "./tools/tool-fontsize";
 import { TbColorFilter } from "react-icons/tb";
+import { IoRemoveCircleOutline } from "react-icons/io5";
 
 export const Toolbar = ({
    editor,
@@ -312,6 +314,21 @@ export const Toolbar = ({
                         )}
                      >
                         <TbColorFilter className="size-4" />
+                     </Button>
+                  </Hint>
+               )}
+               {isImage && (
+                  <Hint label="Remove Background" side="bottom">
+                     <Button
+                        onClick={() => setActiveTool("remove-bg")}
+                        variant="ghost"
+                        size="icon"
+                        className={cn(
+                           "w-auto p-2",
+                           activeTool == "remove-bg" && "bg-gray-100"
+                        )}
+                     >
+                        <EraserIcon className="size-4" />
                      </Button>
                   </Hint>
                )}
