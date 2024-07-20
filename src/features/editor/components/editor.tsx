@@ -17,6 +17,7 @@ import { TextSidebar } from "./sidebar/text-sidebar";
 import { FontSidebar } from "./toolbar/font-sidebar";
 import { ImagesSidebar } from "./sidebar/images-sidebar";
 import { FilterColorSidebar } from "./toolbar/filter-color-sidebar";
+import { AiSidebar } from "./sidebar/ai-sidebar";
 
 export const Editor = () => {
 
@@ -83,6 +84,11 @@ export const Editor = () => {
                setActiveTool={onChangeActiveTool}
             />
             <ImagesSidebar
+               editor={editor}
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+            <AiSidebar
                editor={editor}
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}

@@ -30,6 +30,7 @@ export const TextSidebar = ({
                <Textarea 
                   className="w-full"
                   rows={10}
+                  placeholder="Add text"
                   onChange={(e) => setText(e.target.value)}
                />
                <Button className="w-full"
