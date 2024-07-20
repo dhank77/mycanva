@@ -34,13 +34,13 @@ export const ImagesSidebar = ({
                   button: "Upload Image",
                }}
                endpoint="imageUploader"
-               onClientUploadComplete={(image) => {
+               onClientUploadComplete={(image : any) => {
                   editor?.addImage(image[0].url);
                }}
             />
          </div>
          {isLoading && (
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
                <Loader2 className="size-12 animate-spin" />
             </div>
          )}
