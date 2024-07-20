@@ -10,6 +10,7 @@ import {
    ArrowDownCircleIcon,
    ArrowUpCircleIcon,
    ChevronDown,
+   Copy,
    EraserIcon,
    Trash,
 } from "lucide-react";
@@ -20,7 +21,7 @@ import { FaRotateLeft, FaRotateRight } from "react-icons/fa6";
 import { RxTransparencyGrid } from "react-icons/rx";
 import { ToolFontSize } from "./tools/tool-fontsize";
 import { TbColorFilter } from "react-icons/tb";
-import { IoRemoveCircleOutline } from "react-icons/io5";
+import { IoDuplicateSharp, IoRemoveCircleOutline } from "react-icons/io5";
 
 export const Toolbar = ({
    editor,
@@ -332,6 +333,16 @@ export const Toolbar = ({
                      </Button>
                   </Hint>
                )}
+               <Hint label="Duplicate" side="bottom">
+                  <Button
+                     onClick={() => editor?.onCopy()}
+                     variant="ghost"
+                     size="icon"
+                     className="w-auto p-2"
+                  >
+                     <Copy className="size-4" />
+                  </Button>
+               </Hint>
                <Hint label="Rotate Left" side="bottom">
                   <Button
                      onClick={() => setRotate(-90)}

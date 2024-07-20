@@ -59,6 +59,9 @@ export interface EditorProps {
    sendToBack: () => void;
    setFilter: (filter: string) => void;
 
+   onCopy: () => void;
+   // onPaste: () => void;
+
    delete: () => void;
 
    canvas: fabric.Canvas;

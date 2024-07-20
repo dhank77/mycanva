@@ -184,6 +184,22 @@ export const buildEditor = ({
             }
          });
       },
+      onCopy: () => {
+         canvas.getActiveObjects().forEach((object) => {
+            object.clone((cloneObj : any) => {
+               canvas?.discardActiveObject();
+               cloneObj.set({
+                  left: cloneObj.left + 10,
+                  top: cloneObj.top + 10,
+                  eveted : true,
+               })
+
+               canvas.add(cloneObj);
+               canvas.setActiveObject(cloneObj);
+               canvas.requestRenderAll();
+            })
+         });
+      },
 
       // value toolbar
       canvas,
