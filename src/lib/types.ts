@@ -25,6 +25,7 @@ export type ActiveToolTypes =
    | "text"
    | "shapes"
    | "ai"
+   | "draw"
    | "settings";
 
 export const fonts = [

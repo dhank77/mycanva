@@ -58,6 +58,7 @@ export const buildEditor = ({
             }
             object.set("stroke", color);
          });
+         canvas.freeDrawingBrush.color = strokeColor;
          canvas.renderAll();
       },
       changeStrokeWidth: (width: number) => {
@@ -65,6 +66,7 @@ export const buildEditor = ({
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             object.set("strokeWidth", width);
          });
+         canvas.freeDrawingBrush.width = strokeWidth;
          canvas.renderAll();
       },
       changeFont: (value: string) => {
@@ -199,6 +201,17 @@ export const buildEditor = ({
                canvas.requestRenderAll();
             })
          });
+      },
+
+      enableDrawMode : () => {
+         canvas.discardActiveObject();
+         canvas.renderAll()
+         canvas.isDrawingMode = true;
+         canvas.freeDrawingBrush.width = strokeWidth;
+         canvas.freeDrawingBrush.color = strokeColor;
+      },
+      disableDrawMode : () => {
+         canvas.isDrawingMode = false;
       },
 
       // value toolbar

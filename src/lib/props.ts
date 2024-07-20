@@ -60,6 +60,8 @@ export interface EditorProps {
    setFilter: (filter: string) => void;
 
    onCopy: () => void;
+   enableDrawMode: () => void;
+   disableDrawMode: () => void;
    // onPaste: () => void;
 
    delete: () => void;

@@ -7,7 +7,7 @@ import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { Footer } from "./footer";
-import { ActiveToolTypes, closeSideBarTools,  } from "@/lib/types";
+import { ActiveToolTypes, closeSideBarTools } from "@/lib/types";
 import { ShapeSidebar } from "./sidebar/shape-sidebar";
 import { FillColorSidebar } from "./toolbar/fill-color-sidebar";
 import { BorderColorSidebar } from "./toolbar/border-color-sidebar";
@@ -19,34 +19,42 @@ import { ImagesSidebar } from "./sidebar/images-sidebar";
 import { FilterColorSidebar } from "./toolbar/filter-color-sidebar";
 import { AiSidebar } from "./sidebar/ai-sidebar";
 import { RemoveBgSidebar } from "./toolbar/remove-bg-sidebar";
+import { DrawSidebar } from "./sidebar/draw-sidebar";
 
 export const Editor = () => {
-
-    // activeTool
-    const [activeTool, setActiveTool] = useState<ActiveToolTypes>("select");
-    const onChangeActiveTool = useCallback(
-       (tool: ActiveToolTypes) => {
-          if (tool == activeTool) {
-             return setActiveTool("select");
-          }
- 
-          setActiveTool(tool);
-       },
-       [activeTool]
-    );
- 
-    // hideSidebarNotSelection
-    const clearSelection = useCallback(() => {
-       if(closeSideBarTools.includes(activeTool)) {
-          setActiveTool("select");
-       }
-    }, [activeTool]);
+   const [activeTool, setActiveTool] = useState<ActiveToolTypes>("select");
+   // hideSidebarNotSelection
+   const clearSelection = useCallback(() => {
+      if (closeSideBarTools.includes(activeTool)) {
+         setActiveTool("select");
+      }
+   }, [activeTool]);
 
    const { init, editor } = useEditor({
-      clearSelection : clearSelection,
+      clearSelection: clearSelection,
    });
    const canvasRef = useRef(null);
    const containerRef = useRef<HTMLDivElement>(null);
+
+   // activeTool
+   const onChangeActiveTool = useCallback(
+      (tool: ActiveToolTypes) => {
+         if(tool == "draw"){
+            editor?.enableDrawMode();
+         }
+
+         if(activeTool == "draw"){
+            editor?.disableDrawMode();
+         }
+
+         if (tool == activeTool) {
+            return setActiveTool("select");
+         }
+
+         setActiveTool(tool);
+      },
+      [activeTool, editor]
+   );
 
    useEffect(() => {
       const canvas = new fabric.Canvas(canvasRef.current, {
@@ -63,7 +71,6 @@ export const Editor = () => {
          canvas.dispose();
       };
    }, [init]);
-
 
    return (
       <div className="h-full flex flex-col">
@@ -90,6 +97,11 @@ export const Editor = () => {
                setActiveTool={onChangeActiveTool}
             />
             <AiSidebar
+               editor={editor}
+               activeTool={activeTool}
+               setActiveTool={onChangeActiveTool}
+            />
+            <DrawSidebar
                editor={editor}
                activeTool={activeTool}
                setActiveTool={onChangeActiveTool}

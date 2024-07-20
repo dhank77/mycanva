@@ -1,6 +1,6 @@
 "use client";
 
-import { BrainIcon, ImageIcon, LayoutTemplateIcon, SettingsIcon, ShapesIcon, TypeIcon } from "lucide-react";
+import { BrainIcon, ImageIcon, LayoutTemplateIcon, PencilIcon, SettingsIcon, ShapesIcon, TypeIcon } from "lucide-react";
 import { SidebarItem } from "./sidebar/sidebar-item";
 import { ActiveToolProps } from "@/lib/props";
 
@@ -34,6 +34,12 @@ export const Sidebar = ({
                icon={ShapesIcon}
                onClick={() => setActiveTool("shapes")}
                isActive={activeTool === "shapes"}
+            />
+            <SidebarItem
+               label="Draw"
+               icon={PencilIcon}
+               onClick={() => setActiveTool("draw")}
+               isActive={activeTool === "draw"}
             />
             <SidebarItem
                label="AI"
