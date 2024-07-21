@@ -38,6 +38,19 @@ export const buildEditor = ({
 
    return {
       lokalWorkspace,
+      resetSize: () => autoZoom(),
+      zoomIn: () => {
+         let zoomRasio = canvas.getZoom();
+         zoomRasio = zoomRasio + 0.05;
+         const center = canvas.getCenter()
+         canvas.zoomToPoint({ x: center.left, y: center.top }, zoomRasio > 1.5 ? 1.5 : zoomRasio);
+      },
+      zoomOut: () => {
+         let zoomRasio = canvas.getZoom();
+         zoomRasio = zoomRasio - 0.05;
+         const center = canvas.getCenter()
+         canvas.zoomToPoint({ x: center.left, y: center.top }, zoomRasio < 0.3 ? 0.3 : zoomRasio);
+      },
       changeSize: (size : { width : number, height : number}) => {
          const workspace = lokalWorkspace();
          workspace?.set(size);

@@ -65,7 +65,9 @@ export interface EditorProps {
    lokalWorkspace: () => fabric.Object | undefined;
    enableDrawMode: () => void;
    disableDrawMode: () => void;
-   // onPaste: () => void;
+   zoomIn: () => void;
+   zoomOut: () => void;
+   resetSize: () => void;
 
    delete: () => void;
 
