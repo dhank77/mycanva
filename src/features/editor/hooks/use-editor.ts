@@ -19,7 +19,7 @@ export const useEditor = ({
    const [strokeWidth, setStrokeWidth] = useState<number>(1);
    const [font, setFont] = useState<string>("Arial");
 
-   UseAutoResize({
+   const { autoZoom } = UseAutoResize({
       canvas,
       container,
    });
@@ -33,6 +33,7 @@ export const useEditor = ({
    const editor = useMemo(() => {
       if (canvas) {
          return buildEditor({
+            autoZoom,
             canvas,
             fillColor,
             font,
@@ -48,6 +49,7 @@ export const useEditor = ({
 
       return undefined;
    }, [
+      autoZoom,
       canvas,
       fillColor,
       strokeColor,

@@ -3,6 +3,7 @@ import { BuildEditorProps, EditorProps } from "@/lib/props";
 import { createFilter, isTypeText } from "@/lib/utils";
 
 export const buildEditor = ({
+   autoZoom,
    canvas,
    font,
    fillColor,
@@ -36,6 +37,17 @@ export const buildEditor = ({
    const selected = selectedObject[0];
 
    return {
+      lokalWorkspace,
+      changeSize: (size : { width : number, height : number}) => {
+         const workspace = lokalWorkspace();
+         workspace?.set(size);
+         autoZoom();
+      },
+      changeBackground: (color: string) => {
+         const workspace = lokalWorkspace();
+         workspace?.set("fill", color);
+         canvas.renderAll();
+      },
       changeOpacity: (opacity: number) => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
             object.set("opacity", opacity);

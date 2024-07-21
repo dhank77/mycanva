@@ -58,8 +58,11 @@ export interface EditorProps {
    bringToFront: () => void;
    sendToBack: () => void;
    setFilter: (filter: string) => void;
+   changeSize: (size: { width: number; height: number }) => void;
+   changeBackground: (color: string) => void;
 
    onCopy: () => void;
+   lokalWorkspace: () => fabric.Object | undefined;
    enableDrawMode: () => void;
    disableDrawMode: () => void;
    // onPaste: () => void;
@@ -75,6 +78,7 @@ export interface ActiveToolEditorProps extends ActiveToolProps {
 }
 
 export interface BuildEditorProps {
+   autoZoom: () => void;
    canvas: fabric.Canvas;
    font: string;
    fillColor: string;
