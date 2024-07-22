@@ -3,11 +3,12 @@ import { fabric } from "fabric";
 import { UseAutoResize } from "./use-autoresize";
 import { buildEditor } from "./build-editor";
 import { UseCanvasEvent } from "./use-canvas-event";
+import { useHistory } from "./use-history";
 
 export const useEditor = ({
-   clearSelection
-} :  {
-   clearSelection?: () => void,
+   clearSelection,
+}: {
+   clearSelection?: () => void;
 }) => {
    const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
    const [container, setContainer] = useState<HTMLDivElement | null>(null);
@@ -24,10 +25,13 @@ export const useEditor = ({
       container,
    });
 
+   const { save } = useHistory({ canvas });
+
    UseCanvasEvent({
+      save,
       canvas,
       setSelectedObject,
-      clearSelection
+      clearSelection,
    });
 
    const editor = useMemo(() => {
@@ -58,7 +62,7 @@ export const useEditor = ({
       setFillColor,
       setStrokeColor,
       setStrokeWidth,
-      selectedObject
+      selectedObject,
    ]);
 
    const init = useCallback(
