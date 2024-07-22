@@ -61,7 +61,11 @@ export interface EditorProps {
    changeSize: (size: { width: number; height: number }) => void;
    changeBackground: (color: string) => void;
 
+   canUndo: () => boolean;
+   canRedo: () => boolean;
    onCopy: () => void;
+   onUndo: () => void;
+   onRedo: () => void;
    lokalWorkspace: () => fabric.Object | undefined;
    enableDrawMode: () => void;
    disableDrawMode: () => void;
@@ -80,6 +84,11 @@ export interface ActiveToolEditorProps extends ActiveToolProps {
 }
 
 export interface BuildEditorProps {
+   save: () => void;
+   undo: () => void;
+   redo: () => void;
+   canUndo: () => boolean;
+   canRedo: () => boolean;
    autoZoom: () => void;
    canvas: fabric.Canvas;
    font: string;

@@ -40,11 +40,11 @@ export const Editor = () => {
    // activeTool
    const onChangeActiveTool = useCallback(
       (tool: ActiveToolTypes) => {
-         if(tool == "draw"){
+         if (tool == "draw") {
             editor?.enableDrawMode();
          }
 
-         if(activeTool == "draw"){
+         if (activeTool == "draw") {
             editor?.disableDrawMode();
          }
 
@@ -75,7 +75,11 @@ export const Editor = () => {
 
    return (
       <div className="h-full flex flex-col">
-         <Navbar activeTool={activeTool} setActiveTool={onChangeActiveTool} />
+         <Navbar
+            editor={editor}
+            activeTool={activeTool}
+            setActiveTool={onChangeActiveTool}
+         />
          <div className="flex absolute w-full flex-1 h-[calc(100%-68px)] top-[68px]">
             <Sidebar
                activeTool={activeTool}

@@ -3,6 +3,11 @@ import { BuildEditorProps, EditorProps } from "@/lib/props";
 import { createFilter, isTypeText } from "@/lib/utils";
 
 export const buildEditor = ({
+   save, 
+   undo,
+   redo,
+   canRedo,
+   canUndo,
    autoZoom,
    canvas,
    font,
@@ -37,6 +42,8 @@ export const buildEditor = ({
    const selected = selectedObject[0];
 
    return {
+      canUndo,
+      canRedo,
       lokalWorkspace,
       resetSize: () => autoZoom(),
       zoomIn: () => {
@@ -55,11 +62,13 @@ export const buildEditor = ({
          const workspace = lokalWorkspace();
          workspace?.set(size);
          autoZoom();
+         save();
       },
       changeBackground: (color: string) => {
          const workspace = lokalWorkspace();
          workspace?.set("fill", color);
          canvas.renderAll();
+         save();
       },
       changeOpacity: (opacity: number) => {
          canvas.getActiveObjects().forEach((object: fabric.Object) => {
@@ -227,6 +236,8 @@ export const buildEditor = ({
             })
          });
       },
+      onUndo: () => undo(),
+      onRedo: () => redo(),
 
       enableDrawMode : () => {
          canvas.discardActiveObject();

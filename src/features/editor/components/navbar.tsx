@@ -9,18 +9,25 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Hint } from "@/components/hint";
 
-import { ChevronDown, Download, MousePointerClick, Redo2, Undo2 } from "lucide-react";
+import {
+   ChevronDown,
+   Download,
+   MousePointerClick,
+   Redo2,
+   Undo2,
+} from "lucide-react";
 import { CiFileOn } from "react-icons/ci";
 import { BsCloudCheck } from "react-icons/bs";
 import { VscJson } from "react-icons/vsc";
 import { TbJpg, TbPng, TbSvg } from "react-icons/tb";
-import { ActiveToolProps } from "@/lib/props";
+import { ActiveToolEditorProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
 
 export const Navbar = ({
+   editor,
    activeTool,
    setActiveTool,
-}: ActiveToolProps) => {
+}: ActiveToolEditorProps) => {
    return (
       <nav className="h-[68px] w-full flex items-center p-4 gap-x-8 border-b lg:pl-[34px]">
          <Logo />
@@ -48,8 +55,8 @@ export const Navbar = ({
          </DropdownMenu>
          <Separator orientation="vertical" className="mx-2" />
          <Hint label="Select" side="bottom" sideOffset={10}>
-            <Button 
-               size="icon" 
+            <Button
+               size="icon"
                variant="ghost"
                onClick={() => setActiveTool("select")}
                className={cn(activeTool == "select" && "bg-muted")}
@@ -58,12 +65,22 @@ export const Navbar = ({
             </Button>
          </Hint>
          <Hint label="Undo" side="bottom" sideOffset={10}>
-            <Button size="icon" variant="ghost">
+            <Button
+               size="icon"
+               variant="ghost"
+               disabled={!editor?.canUndo()}
+               onClick={() => editor?.onUndo()}
+            >
                <Undo2 className="size-4" />
             </Button>
          </Hint>
          <Hint label="Redo" side="bottom" sideOffset={10}>
-            <Button size="icon" variant="ghost">
+            <Button
+               size="icon"
+               variant="ghost"
+               disabled={!editor?.canRedo()}
+               onClick={() => editor?.onRedo()}
+            >
                <Redo2 className="size-4" />
             </Button>
          </Hint>
@@ -77,7 +94,7 @@ export const Navbar = ({
                <DropdownMenu modal={false}>
                   <DropdownMenuTrigger asChild>
                      <Button variant="ghost" size="sm">
-                     Export
+                        Export
                         <Download className="ml-2 size-4" />
                      </Button>
                   </DropdownMenuTrigger>

@@ -39,5 +39,5 @@ export const UseCanvasEvent = ({
             canvas.off("selection:cleared");
         }
       }
-   }, [canvas, clearSelection]);
+   }, [canvas, clearSelection, save, setSelectedObject]);
 };

@@ -4,6 +4,7 @@ import { UseAutoResize } from "./use-autoresize";
 import { buildEditor } from "./build-editor";
 import { UseCanvasEvent } from "./use-canvas-event";
 import { useHistory } from "./use-history";
+import { JSON_KEYS } from "@/lib/types";
 
 export const useEditor = ({
    clearSelection,
@@ -25,7 +26,15 @@ export const useEditor = ({
       container,
    });
 
-   const { save } = useHistory({ canvas });
+   const {
+      save,
+      redo,
+      undo,
+      canRedo,
+      canUndo,
+      canvasHistory,
+      setHistoryIndex,
+   } = useHistory({ canvas });
 
    UseCanvasEvent({
       save,
@@ -37,6 +46,11 @@ export const useEditor = ({
    const editor = useMemo(() => {
       if (canvas) {
          return buildEditor({
+            save,
+            undo,
+            redo,
+            canUndo,
+            canRedo,
             autoZoom,
             canvas,
             fillColor,
@@ -53,15 +67,17 @@ export const useEditor = ({
 
       return undefined;
    }, [
-      autoZoom,
       canvas,
+      save,
+      undo,
+      redo,
+      canUndo,
+      canRedo,
+      autoZoom,
       fillColor,
+      font,
       strokeColor,
       strokeWidth,
-      setSelectedObject,
-      setFillColor,
-      setStrokeColor,
-      setStrokeWidth,
       selectedObject,
    ]);
 
@@ -105,8 +121,12 @@ export const useEditor = ({
 
          setCanvas(initialCanvas);
          setContainer(initialContainer);
+
+         const currentState = JSON.stringify(initialCanvas.toJSON(JSON_KEYS));
+         canvasHistory.current = [currentState];
+         setHistoryIndex(0);
       },
-      []
+      [canvasHistory, setHistoryIndex]
    );
    return { init, editor };
 };
