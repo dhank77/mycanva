@@ -5,6 +5,7 @@ import { buildEditor } from "./build-editor";
 import { UseCanvasEvent } from "./use-canvas-event";
 import { useHistory } from "./use-history";
 import { JSON_KEYS } from "@/lib/types";
+import { useHotKeys } from "./use-hotkeys";
 
 export const useEditor = ({
    clearSelection,
@@ -41,6 +42,15 @@ export const useEditor = ({
       canvas,
       setSelectedObject,
       clearSelection,
+   });
+
+   useHotKeys({
+      canvas,
+      save,
+      undo,
+      redo,
+      copy : () => {}, //TODO : refactor editor onCopy
+      paste : () => {}, //TODO : refactor editor onCopy
    });
 
    const editor = useMemo(() => {
