@@ -6,6 +6,7 @@ import { UseCanvasEvent } from "./use-canvas-event";
 import { useHistory } from "./use-history";
 import { JSON_KEYS } from "@/lib/types";
 import { useHotKeys } from "./use-hotkeys";
+import { useWindowEvent } from "./use-window-event";
 
 export const useEditor = ({
    clearSelection,
@@ -21,6 +22,8 @@ export const useEditor = ({
    const [strokeColor, setStrokeColor] = useState<string>("black");
    const [strokeWidth, setStrokeWidth] = useState<number>(1);
    const [font, setFont] = useState<string>("Arial");
+
+   useWindowEvent();
 
    const { autoZoom } = UseAutoResize({
       canvas,
