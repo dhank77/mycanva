@@ -6,8 +6,6 @@ import {
   primaryKey,
   integer,
 } from "drizzle-orm/pg-core"
-import postgres from "postgres"
-import { drizzle } from "drizzle-orm/postgres-js"
 import type { AdapterAccountType } from "next-auth/adapters"
  
 export const users = pgTable("user", {

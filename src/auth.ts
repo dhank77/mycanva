@@ -1,13 +1,9 @@
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
-import PostgresAdapter from "@auth/pg-adapter";
-import { Pool } from "pg";
 import Github from "next-auth/providers/github";
-
-const pool = new Pool({
-   connectionString: process.env.DATABASE_URL!,
-});
+import { db } from "./db/drizzle";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PostgresAdapter(pool),
-  providers: [Github]
+   adapter: DrizzleAdapter(db),
+   providers: [Github],
 });
