@@ -100,7 +100,7 @@ export const Navbar = ({
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="min-w-60">
                      <DropdownMenuItem
-                        onClick={() => {}}
+                        onClick={() => editor?.saveJson()}
                         className="flex items-center gap-x-2"
                      >
                         <VscJson className="size-8" />
@@ -112,7 +112,7 @@ export const Navbar = ({
                         </div>
                      </DropdownMenuItem>
                      <DropdownMenuItem
-                        onClick={() => {}}
+                        onClick={() => editor?.saveFile("png")}
                         className="flex items-center gap-x-2"
                      >
                         <TbPng className="size-8" />
@@ -124,7 +124,7 @@ export const Navbar = ({
                         </div>
                      </DropdownMenuItem>
                      <DropdownMenuItem
-                        onClick={() => {}}
+                        onClick={() => editor?.saveFile("jpg")}
                         className="flex items-center gap-x-2"
                      >
                         <TbJpg className="size-8" />
@@ -136,7 +136,7 @@ export const Navbar = ({
                         </div>
                      </DropdownMenuItem>
                      <DropdownMenuItem
-                        onClick={() => {}}
+                        onClick={() => editor?.saveFile("svg")}
                         className="flex items-center gap-x-2"
                      >
                         <TbSvg className="size-8" />
