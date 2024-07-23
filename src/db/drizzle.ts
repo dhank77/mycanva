@@ -1,9 +1,10 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Client } from "pg";
+import { drizzle } from 'drizzle-orm/postgres-js';
+import { migrate } from 'drizzle-orm/postgres-js/migrator';
+import postgres from 'postgres';
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-});
+// for migrations
+const migrationClient = postgres(process.env.DATABASE_URL!, { max: 1 });
+migrate(drizzle(migrationClient), { migrationsFolder: 'src/db/migrations' });
 
-await client.connect();
-export const db = drizzle(client);
+const queryClient = postgres(process.env.DATABASE_URL!);
+export const db = drizzle(queryClient);

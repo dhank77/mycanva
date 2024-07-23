@@ -15,7 +15,8 @@ const nextConfig = {
                 hostname: 'replicate.delivery',
             },
         ]
-    }
+    },
+    
 };
 
 export default nextConfig;
