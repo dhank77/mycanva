@@ -1,7 +1,9 @@
-import { auth } from "@/auth";
+import { protectServer } from "@/features/auth/utils";
 
-export default async function Home() {
-  const session = await auth();
+const Page = async () => {
+   await protectServer();
 
-  return <div>{JSON.stringify(session)}</div>;
-}
+   return <div>Home Page!</div>;
+};
+
+export default Page;
