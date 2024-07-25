@@ -35,8 +35,12 @@ export const RegisterCard = () => {
     mutate(
       { email, password, name },
       {
-        onSuccess: (data) => {
-          console.log(data);
+        onSuccess: () => {
+          signIn("credentials", {
+            email,
+            password,
+            callbackUrl: "/",
+          })
         },
       }
     );
