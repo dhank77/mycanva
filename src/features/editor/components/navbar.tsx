@@ -11,7 +11,9 @@ import { Hint } from "@/components/hint";
 
 import {
   ChevronDown,
+  CreditCard,
   Download,
+  LogOutIcon,
   MousePointerClick,
   Redo2,
   Undo2,
@@ -23,6 +25,8 @@ import { TbJpg, TbPng, TbSvg } from "react-icons/tb";
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
 import { useFilePicker } from "use-file-picker";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useSession, signOut } from "next-auth/react";
 
 export const Navbar = ({
   editor,
@@ -42,6 +46,10 @@ export const Navbar = ({
       }
     },
   });
+
+  const user = useSession();
+  const name = user.data?.user?.name!;
+  const imageSrc = user.data?.user?.image!;
 
   return (
     <nav className="h-[68px] w-full flex items-center p-4 gap-x-8 border-b lg:pl-[34px]">
@@ -154,6 +162,35 @@ export const Navbar = ({
                   <p className="text-xs text-muted-foreground">Save SVG file</p>
                 </div>
               </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+        <div>
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild>
+              <Avatar>
+                <AvatarImage alt={name} src={imageSrc} />
+                <AvatarFallback className="font-bold bg-blue-500/20">
+                  {name.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-40">
+              <DropdownMenuItem
+                onClick={() => {}}
+                className="flex items-center gap-x-2"
+              >
+                <CreditCard className="size-6" />
+                <p>Billing</p>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="flex items-center gap-x-2"
+              >
+                <LogOutIcon className="size-6" />
+                <p>Logout</p>
+              </DropdownMenuItem>
+              
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
