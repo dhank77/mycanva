@@ -16,11 +16,14 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import React, { useState } from "react";
+import { useRegister } from "../api/use-register";
 
 export const RegisterCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+
+  const { mutate, isPending } = useRegister();
 
   const onProvider = (provider: "google" | "github") => {
     signIn(provider);
@@ -29,7 +32,14 @@ export const RegisterCard = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    
+    mutate(
+      { email, password, name },
+      {
+        onSuccess: (data) => {
+          console.log(data);
+        },
+      }
+    );
   };
 
   return (
@@ -43,30 +53,34 @@ export const RegisterCard = () => {
       <CardContent className="mt-4 p-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-3">
           <Input
+            disabled={isPending}
             type="text"
             placeholder="Fullname"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <Input
+            disabled={isPending}
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
+            disabled={isPending}
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button className="w-full" type="submit">
+          <Button disabled={isPending} className="w-full" type="submit">
             Register
           </Button>
         </form>
         <Separator className="my-6" />
         <div className="flex flex-col gap-y-2.5">
           <Button
+            disabled={isPending}
             onClick={() => onProvider("google")}
             variant="outline"
             size="lg"
@@ -76,6 +90,7 @@ export const RegisterCard = () => {
             <p>Continue with Google</p>
           </Button>
           <Button
+            disabled={isPending}
             onClick={() => onProvider("github")}
             variant="outline"
             size="lg"
