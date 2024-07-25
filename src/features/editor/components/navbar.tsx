@@ -23,7 +23,7 @@ import { TbJpg, TbPng, TbSvg } from "react-icons/tb";
 import { ActiveToolEditorProps } from "@/lib/props";
 import { cn } from "@/lib/utils";
 import { useFilePicker } from "use-file-picker";
-import { UserBotton } from "@/features/auth/components/user-button";
+import { UserButton } from "@/features/auth/components/user-button";
 
 export const Navbar = ({
   editor,
@@ -158,7 +158,7 @@ export const Navbar = ({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <UserBotton />
+        <UserButton />
       </div>
     </nav>
   );

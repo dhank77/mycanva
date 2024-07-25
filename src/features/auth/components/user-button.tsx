@@ -8,7 +8,7 @@ import { CreditCard, LogOutIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSession, signOut } from "next-auth/react";
 
-export const UserBotton = () => {
+export const UserButton = () => {
   const user = useSession();
   const name = user.data?.user?.name!;
   const imageSrc = user.data?.user?.image!;
