@@ -28,7 +28,7 @@ export const Sidebar = () => {
             <Separator />
          </div>
          <SidebarItem icon={CreditCard} label="Billing" href="#" />
-         <SidebarItem icon={HelpCircleIcon} label="Get Help ?" href="#" />
+         <SidebarItem icon={HelpCircleIcon} label="Get Help ?" href="mailto:d41113512@gmail.com" />
       </aside>
    );
 };
