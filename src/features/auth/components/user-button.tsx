@@ -19,7 +19,7 @@ export const UserButton = () => {
           <Avatar>
             <AvatarImage alt={name} src={imageSrc} />
             <AvatarFallback className="font-bold bg-blue-500/20">
-              {name.charAt(0).toUpperCase()}
+              {name?.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
