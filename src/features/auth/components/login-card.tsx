@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -18,19 +17,22 @@ import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 
 export const LoginCard = () => {
-
-   const [email, setEmail] = useState("")
-   const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onProvider = (provider: "google" | "github") => {
     signIn(provider);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-   e.preventDefault();
+    e.preventDefault();
 
-   
- };
+    signIn("credentials", {
+      email: email,
+      password: password,
+      callbackUrl: "/",
+    })
+  };
 
   return (
     <Card className="w-full p-8">
@@ -54,7 +56,9 @@ export const LoginCard = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button type="button" className="w-full">Login</Button>
+          <Button type="submit" className="w-full">
+            Login
+          </Button>
         </form>
         <Separator className="my-6" />
         <div className="flex flex-col gap-y-2.5">
