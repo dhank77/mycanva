@@ -6,7 +6,6 @@ import {
   type AuthConfig,
   initAuthConfig,
   verifyAuth,
-  authHandler,
 } from "@hono/auth-js";
 import authConfig from "@/auth.config";
 

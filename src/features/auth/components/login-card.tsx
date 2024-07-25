@@ -15,10 +15,15 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
+import { useSearchParams } from "next/navigation";
+import { AlertTriangle } from "lucide-react";
 
 export const LoginCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const params = useSearchParams();
+  const alert = params.get("error");
 
   const onProvider = (provider: "google" | "github") => {
     signIn(provider);
@@ -31,7 +36,7 @@ export const LoginCard = () => {
       email: email,
       password: password,
       callbackUrl: "/",
-    })
+    });
   };
 
   return (
@@ -43,6 +48,14 @@ export const LoginCard = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="mt-4 p-2">
+        {alert && (
+          <div className="p-2 bg-destructive/20 mb-4 flex justify-center items-center rounded-md">
+            <AlertTriangle className="size-4 text-destructive mr-2" />
+            <p className="text-sm font-medium text-destructive">
+              User and password not found!
+            </p>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-3">
           <Input
             type="email"

@@ -17,11 +17,14 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import React, { useState } from "react";
 import { useRegister } from "../api/use-register";
+import { AlertTriangle } from "lucide-react";
 
 export const RegisterCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+
+  const [alert, setAlert] = useState(false);
 
   const { mutate, isPending } = useRegister();
 
@@ -40,7 +43,10 @@ export const RegisterCard = () => {
             email,
             password,
             callbackUrl: "/",
-          })
+          });
+        },
+        onError: (data) => {
+          setAlert(true)
         },
       }
     );
@@ -55,6 +61,14 @@ export const RegisterCard = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="mt-4 p-2">
+        {alert && (
+          <div className="p-2 bg-destructive/20 mb-4 flex justify-center items-center rounded-md">
+            <AlertTriangle className="size-4 text-destructive mr-2" />
+            <p className="text-sm font-medium text-destructive">
+              Something went wrong!
+            </p>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="flex flex-col gap-y-3">
           <Input
             disabled={isPending}
