@@ -2,7 +2,6 @@ import { apiClient } from "@/lib/hono";
 import { useMutation } from "@tanstack/react-query";
 import { InferRequestType, InferResponseType } from "hono";
 import { toast } from "sonner";
-import { CheckCheckIcon, AlertCircle } from "lucide-react";
 
 type ResponseType = InferResponseType<typeof apiClient.api.projects.$post, 200>;
 type RequestType = InferRequestType<
