@@ -18,7 +18,7 @@ export const Banner = () => {
                 variant="secondary"  
                 className="w-[10rem]"
               >
-                Create Project <ArrowRightIcon className="size-4 ml-2" />
+                <p className="font-medium flex items-center">Create Project <ArrowRightIcon className="size-4 ml-2" /></p>
               </Button>
             </div>
          </div>

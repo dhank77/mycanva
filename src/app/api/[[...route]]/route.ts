@@ -2,6 +2,7 @@ import { Context, Hono } from "hono";
 import { handle } from "hono/vercel";
 import user from "./user";
 import images from "./images";
+import projects from "./projects";
 import {
   type AuthConfig,
   initAuthConfig,
@@ -29,7 +30,7 @@ app.use("*", async (c, next) => {
   }
 });
 
-const route = app.route("/user", user).route("/images", images);
+const route = app.route("/user", user).route("/images", images).route("/projects", projects);
 
 export const GET = handle(app);
 export const POST = handle(app);
