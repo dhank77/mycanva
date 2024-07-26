@@ -17,7 +17,7 @@ const app = new Hono().post(
    ),
    async (c) => {
       const auth = c.get("authUser");
-      const { name, json, width, height } = c.req.valid("json");
+      const data = c.req.valid("json");
 
       if (!auth.token?.id) {
          return c.json({ error: "Unauthorized" }, 401);
@@ -26,10 +26,7 @@ const app = new Hono().post(
       const resData = await db
          .insert(projects)
          .values({
-            name,
-            json,
-            width,
-            height,
+            ...data,
             userId: auth.token.id,
             createdAt: new Date(),
             updatedAt: new Date(),

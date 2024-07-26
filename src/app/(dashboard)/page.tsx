@@ -9,7 +9,7 @@ const DashboardPage = async () => {
 
    return (
       <div>
-         <h1 className="underline mb-2 decoration-sky-900/30 decoration-2 underline-offset-[-0.4999px] ">Welcome back, <span className="font-semibold">{session?.user?.name}</span></h1>
+         <h1 className="underline mb-2 decoration-sky-900/30 decoration-2 ">Welcome back, <span className="font-semibold">{session?.user?.name}</span></h1>
          <Banner />
       </div>
    );
