@@ -10,8 +10,14 @@ import { useWindowEvent } from "./use-window-event";
 
 export const useEditor = ({
    clearSelection,
+   saveCallback,
 }: {
    clearSelection?: () => void;
+   saveCallback?: (values: {
+      json: string;
+      width: number;
+      height: number;
+   }) => void;
 }) => {
    const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
    const [container, setContainer] = useState<HTMLDivElement | null>(null);
@@ -38,7 +44,7 @@ export const useEditor = ({
       canUndo,
       canvasHistory,
       setHistoryIndex,
-   } = useHistory({ canvas });
+   } = useHistory({ canvas, saveCallback });
 
    UseCanvasEvent({
       save,
@@ -52,8 +58,8 @@ export const useEditor = ({
       save,
       undo,
       redo,
-      copy : () => {}, //TODO : refactor editor onCopy
-      paste : () => {}, //TODO : refactor editor onCopy
+      copy: () => {}, //TODO : refactor editor onCopy
+      paste: () => {}, //TODO : refactor editor onCopy
    });
 
    const editor = useMemo(() => {
