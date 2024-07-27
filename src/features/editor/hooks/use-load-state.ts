@@ -23,5 +23,5 @@ export const useLoadState = ({
          });
          intialized.current = true;
       }
-   }, [canvas, initialState]);
+   }, [autoZoom, canvas, canvasHistory, initialState, setHistoryIndex]);
 };
