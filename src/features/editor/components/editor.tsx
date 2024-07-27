@@ -23,6 +23,7 @@ import { DrawSidebar } from "./sidebar/draw-sidebar";
 import { SettingsSidebar } from "./sidebar/settings-sidebar";
 import { ResponTypeProject } from "@/features/projects/api/use-get-project";
 import { useUpdateProject } from "@/features/projects/api/use-update-project";
+import debounce from "lodash.debounce";
 
 export const Editor = ({
    initialData,
@@ -31,10 +32,15 @@ export const Editor = ({
 }) => {
    const { mutate } = useUpdateProject(initialData.id);
 
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    const debounceUpdate = useCallback(
-      (values: { json: string; width: number; height: number, }) => {
+      debounce((values: { 
+         json: string; 
+         width: number; 
+         height: number 
+      }) => {
          mutate(values);
-      },
+      }, 1000),
       [mutate]
    );
 
