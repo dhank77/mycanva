@@ -25,11 +25,11 @@ import { ResponTypeProject } from "@/features/projects/api/use-get-project";
 import { useUpdateProject } from "@/features/projects/api/use-update-project";
 
 export const Editor = ({
-   intialData,
+   initialData,
 }: {
-   intialData: ResponTypeProject["data"];
+   initialData: ResponTypeProject["data"];
 }) => {
-   const { mutate } = useUpdateProject(intialData.id);
+   const { mutate } = useUpdateProject(initialData.id);
 
    const debounceUpdate = useCallback(
       (values: { json: string; width: number; height: number, }) => {
@@ -47,6 +47,9 @@ export const Editor = ({
    }, [activeTool]);
 
    const { init, editor } = useEditor({
+      initialJson: initialData.json ?? "",
+      initialWidth: initialData.width,
+      initialHeight: initialData.height,
       clearSelection: clearSelection,
       saveCallback: debounceUpdate,
    });

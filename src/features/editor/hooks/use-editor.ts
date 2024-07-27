@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { fabric } from "fabric";
 import { UseAutoResize } from "./use-autoresize";
 import { buildEditor } from "./build-editor";
@@ -7,11 +7,18 @@ import { useHistory } from "./use-history";
 import { JSON_KEYS } from "@/lib/types";
 import { useHotKeys } from "./use-hotkeys";
 import { useWindowEvent } from "./use-window-event";
+import { useLoadState } from "./use-load-state";
 
 export const useEditor = ({
+   initialJson,
+   initialWidth,
+   initialHeight,
    clearSelection,
    saveCallback,
 }: {
+   initialJson?: string;
+   initialWidth?: number;
+   initialHeight?: number;
    clearSelection?: () => void;
    saveCallback?: (values: {
       json: string;
@@ -19,6 +26,11 @@ export const useEditor = ({
       height: number;
    }) => void;
 }) => {
+
+   const jsonRef = useRef(initialJson);
+   const widthRef = useRef(initialWidth);
+   const heightRef = useRef(initialHeight);
+
    const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
    const [container, setContainer] = useState<HTMLDivElement | null>(null);
 
@@ -60,6 +72,14 @@ export const useEditor = ({
       redo,
       copy: () => {}, //TODO : refactor editor onCopy
       paste: () => {}, //TODO : refactor editor onCopy
+   });
+
+   useLoadState({
+      canvas,
+      autoZoom,
+      canvasHistory,
+      setHistoryIndex,
+      initialState : jsonRef,
    });
 
    const editor = useMemo(() => {
@@ -119,8 +139,8 @@ export const useEditor = ({
          });
 
          const initialWorkspace = new fabric.Rect({
-            width: 900,
-            height: 1200,
+            width: widthRef.current,
+            height: heightRef.current,
             name: "clip",
             fill: "white",
             selectable: false,

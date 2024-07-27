@@ -38,7 +38,7 @@ const EditorPage = ({
     );
   }
 
-  return <Editor intialData={data} />;
+  return <Editor initialData={data} />;
 };
 
 export default EditorPage;
