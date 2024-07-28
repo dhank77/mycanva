@@ -45,7 +45,7 @@ export const BottomMenu = () => {
                   className="bg-blue-300 dark:bg-gray-300 border-none"
                   asChild
                >
-                  <Link href="/">
+                  <Link href="/mycv-e3295981-ca75-44d2-9e8f-a60c5a9b9ead.pdf">
                      <DownloadIcon className="size-6" />
                   </Link>
                </Button>

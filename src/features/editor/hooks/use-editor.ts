@@ -15,7 +15,9 @@ export const useEditor = ({
    initialHeight,
    clearSelection,
    saveCallback,
+   isShow = false,
 }: {
+   isShow?: boolean;
    initialJson?: string;
    initialWidth?: number;
    initialHeight?: number;
@@ -41,7 +43,10 @@ export const useEditor = ({
    const [strokeWidth, setStrokeWidth] = useState<number>(1);
    const [font, setFont] = useState<string>("Arial");
 
-   useWindowEvent();
+   if(!isShow){
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useWindowEvent();
+   }
 
    const { autoZoom } = UseAutoResize({
       canvas,

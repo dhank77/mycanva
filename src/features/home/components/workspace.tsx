@@ -18,6 +18,7 @@ export const Workspace = ({
       initialJson: initialData.json ?? "",
       initialWidth: initialData.width ?? 0,
       initialHeight: initialData.height ?? 0,
+      isShow: true,
    });
 
    useEffect(() => {
