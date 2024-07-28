@@ -32,7 +32,7 @@ export const UserButton = () => {
             <p>Billing</p>
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => signOut({ callbackUrl: "/" })}
+            onClick={() => signOut({ callbackUrl: "/login" })}
             className="flex items-center gap-x-2"
           >
             <LogOutIcon className="size-6" />

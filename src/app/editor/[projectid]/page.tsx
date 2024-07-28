@@ -30,7 +30,7 @@ const EditorPage = ({
           <p className="text-sm text-muted-foreground">Failed to load project</p>
         </div>
         <Button asChild variant="secondary" size="sm">
-          <Link href="/">
+          <Link href="/dashboard">
             <ArrowLeft className="size-4 mr-2" /> Back to Home
           </Link>
         </Button>

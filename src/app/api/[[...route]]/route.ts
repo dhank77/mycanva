@@ -23,7 +23,7 @@ function getAuthConfig(c: Context): AuthConfig {
 app.use("*", initAuthConfig(getAuthConfig));
 
 app.use("*", async (c, next) => {
-  if (c.req.path.startsWith("/api/user")) {
+  if (c.req.path.startsWith("/api/user") || c.req.path.startsWith("/api/projects/cv")) {
     return next();
   } else {
     await verifyAuth()(c, next);

@@ -74,7 +74,7 @@ export default {
       return token;
     },
     async session({ session, token }) {
-      if (token.id) {
+      if (token && token.id) {
         session.user.id = token.id;
       }
       return session;

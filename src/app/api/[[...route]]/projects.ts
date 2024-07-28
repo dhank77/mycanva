@@ -6,6 +6,18 @@ import { z } from "zod";
 import { and, eq } from "drizzle-orm";
 
 const app = new Hono()
+   .get("/cv", async (c) => {
+      const data = await db
+         .select()
+         .from(projects)
+         .where(eq(projects.id, "3244bdb9-3e51-49ac-b8d0-c31fe9ae6c6e"));
+
+      if (data.length <= 0) {
+         return c.json({ error: "Data not found" }, 404);
+      }
+
+      return c.json({ data: data[0] });
+   })
    .get(
       "/:id",
       zValidator(

@@ -42,7 +42,7 @@ export const RegisterCard = () => {
           signIn("credentials", {
             email,
             password,
-            callbackUrl: "/",
+            callbackUrl: "/dashboard",
           });
         },
         onError: (data) => {

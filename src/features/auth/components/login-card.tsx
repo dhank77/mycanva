@@ -35,7 +35,7 @@ export const LoginCard = () => {
     signIn("credentials", {
       email: email,
       password: password,
-      callbackUrl: "/",
+      callbackUrl: "/dashboard",
     });
   };
 

@@ -13,6 +13,6 @@ export const redirectToHome = async () => {
    const session = await auth();
 
    if(session){
-      redirect("/");
+      redirect("/dashboard");
    }
 }
